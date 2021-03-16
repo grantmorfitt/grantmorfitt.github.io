@@ -4,16 +4,59 @@
   <!-- basic.html -->
   <title>Development of the Modern Aircraft</title>
   <meta charset = "UTF-8" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  
+  <script src="https://threejs.org/build/three.min.js"></script>
+  
+  <script src="https://raw.githack.com/syt123450/giojs/master/build/gio.min.js"></script>
+  
+  <!-- load data in this data script -->
+  <script src="https://raw.githack.com/syt123450/giojs/master/assets/data/sampleData.js"></script>
+  
 </head>
 <body>
+    
   <h1>Development of the Modern Aircraft</h1>
 
-  <iframe src='https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?source=1E0nERc4XDQoUejYeOhhKiFyedHC3fGQXe6YORd7FHO8&font=Default&lang=en&initial_zoom=2&height=650' width='100%' height='650' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0'></iframe>
   
+  
+  <div id="globeArea" style="width: 200px; height: 200px"></div>
+  
+<script>
+
+    // get the container to hold the IO globe
+
+    var container = document.getElementById( "globalArea" );
+
+    // create controller for the IO globe, input the container as the parameter
+
+    var controller = new GIO.Controller( container );
+
+    // ask a file for the JSON data, using AJAX to load the data
+
+    $.ajax( {
+
+        url: "data/sampleData.json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType: "json",
+        success: function ( inputData ) {
+
+            // if received the data, use addData() API to add the the data to the controller
+
+            controller.addData( inputData );
+
+            // call the init() API to show the IO globe in the browser
+
+            controller.init();
+
+        }
+
+    } );
+
+</script>
+  
+
 </body>
 </html>
-
-
-
-
-
