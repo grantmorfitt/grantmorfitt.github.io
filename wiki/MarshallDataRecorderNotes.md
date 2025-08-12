@@ -1,9 +1,6 @@
-
-"""
-@author : Grant Morfitt
-grant.e.morfitt@faa.gov
-"""
-
+---
+title: Marshall Data Recorder Notes
+---
 
 #MainOverview
 
