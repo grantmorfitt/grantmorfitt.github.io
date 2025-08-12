@@ -1,0 +1,26 @@
+<nav style="
+  background-color: #007acc;
+  padding: 14px 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+">
+  <a href="{{ '/' | relative_url }}" style="
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.25s ease;
+  " onmouseover="this.style.backgroundColor='#005f99'" onmouseout="this.style.backgroundColor='transparent'">Home</a>
+  
+  <a href="{{ '/wiki/' | relative_url }}" style="
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.25s ease;
+  " onmouseover="this.style.backgroundColor='#005f99'" onmouseout="this.style.backgroundColor='transparent'">Wiki</a>
+</nav>
