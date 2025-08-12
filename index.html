@@ -97,37 +97,12 @@
 
     <div class="wiki-section">
       <h2>Wiki</h2>
-      <ul class="wiki-list" id="wiki-list">
-        <li>Loading...</li>
+      <ul class="wiki-list">
+        <li><a href="wiki/post1.html">Post 1 Title</a></li>
+        <li><a href="wiki/post2.html">Post 2 Title</a></li>
+        <li><a href="wiki/post3.html">Post 3 Title</a></li>
       </ul>
     </div>
   </div>
-
-  <script>
-    // Change these to your repo owner and repo name
-    const owner = "YOUR_GITHUB_USERNAME";
-    const repo = "YOUR_REPO.wiki"; // .wiki is important for wiki repos
-
-    fetch(`https://api.github.com/repos/${owner}/${repo}/contents`)
-      .then(response => response.json())
-      .then(data => {
-        const wikiList = document.getElementById("wiki-list");
-        wikiList.innerHTML = "";
-
-        data.forEach(file => {
-          if (file.name.endsWith(".md")) {
-            const title = file.name.replace(".md", "");
-            const link = `https://github.com/${owner}/${repo}/wiki/${encodeURIComponent(title)}`;
-            const li = document.createElement("li");
-            li.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
-            wikiList.appendChild(li);
-          }
-        });
-      })
-      .catch(error => {
-        document.getElementById("wiki-list").innerHTML = "<li>Error loading wiki pages.</li>";
-        console.error(error);
-      });
-  </script>
 </body>
 </html>
