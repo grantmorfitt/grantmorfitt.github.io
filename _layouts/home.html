@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title | default: site.title }}</title>
+  <style>
+    body {
+      margin: 0; 
+      font-family: Arial, sans-serif; 
+      background-color: #f4f4f9; 
+      color: #333; 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+      justify-content: center; 
+      align-items: center; 
+      padding: 20px;
+    }
+    main {
+      max-width: 700px; 
+      width: 100%; 
+      background: white; 
+      padding: 40px 30px; 
+      border-radius: 14px; 
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #7c3aed);
+      color: white;
+      font-weight: 700;
+      font-size: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      user-select: none;
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.8rem;
+    }
+    p.lead {
+      margin: 0 0 20px 0;
+      font-size: 1.15rem;
+      color: #555;
+    }
+    .socials {
+      margin-bottom: 28px;
+    }
+    .socials a {
+      display: inline-block;
+      margin: 0 12px;
+      font-size: 28px;
+      text-decoration: none;
+      color: #333;
+      transition: color 0.2s;
+    }
+    .socials a:hover {
+      color: #06b6d4;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #06b6d4, #7c3aed);
+      color: white;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #0ea5a4, #9d4edd);
+    }
+    footer {
+      margin-top: 48px;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="avatar">GM</div>
+    <h1>Grant Morfitt</h1>
+    <p class="lead">Engineer • Developer • Creator</p>
+
+    <div class="socials">
+      <a href="mailto:you@example.com" title="Email" aria-label="Email">✉️</a>
+      <a href="https://github.com/grantmorfitt" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">🐙</a>
+      <a href="https://linkedin.com/in/grantmorfitt" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">💼</a>
+      <a href="https://twitter.com/grantmorfitt" target="_blank" rel="noopener" title="Twitter" aria-label="Twitter">🐦</a>
+    </div>
+
+    <a href="/wiki/" class="btn">Visit Wiki →</a>
+  </main>
+
+  <footer>
+    &copy; {{ "now" | date: "%Y" }} Grant Morfitt
+  </footer>
+</body>
+</html>
