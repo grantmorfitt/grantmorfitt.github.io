@@ -64,30 +64,32 @@
 <body>
 <nav style="
   background-color: #007acc;
-  padding: 14px 40px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px 24px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 32px;
   font-weight: 600;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
 ">
   <a href="{{ '/' | relative_url }}" style="
     color: white;
     text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.25s ease;
-  " onmouseover="this.style.backgroundColor='#005f99'" onmouseout="this.style.backgroundColor='transparent'">Home</a>
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  " onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.2)'; this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">Home</a>
   
   <a href="{{ '/wiki/' | relative_url }}" style="
     color: white;
     text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: background-color 0.25s ease;
-  " onmouseover="this.style.backgroundColor='#005f99'" onmouseout="this.style.backgroundColor='transparent'">Wiki</a>
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  " onmouseover="this.style.backgroundColor='rgba(255, 255, 255, 0.2)'; this.style.color='#ffffff';" onmouseout="this.style.backgroundColor='transparent'; this.style.color='white';">Wiki</a>
 </nav>
+
   
   <main>
     {{ content }}
@@ -97,5 +99,6 @@
   </footer>
 </body>
 </html>
+
 
 
