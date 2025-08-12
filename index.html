@@ -5,166 +5,141 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Grant Morfitt — Engineer & Developer</title>
   <meta name="description" content="Personal site / portfolio for Grant Morfitt — engineer, firefighter, tinkerer." />
-  <!-- Open Graph -->
-  <meta property="og:title" content="Grant Morfitt — Engineer & Developer" />
-  <meta property="og:description" content="Personal site / portfolio — projects, blog, and contact." />
-  <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0f172a" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
-
   <style>
     :root{
       --bg:#0f172a; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --glass: rgba(255,255,255,0.03);
-      --text: #e6eef8;
-      --radius: 12px;
-      --max-width: 1100px;
+      --text: #e6eef8; --radius: 12px; --max-width: 1100px;
     }
     [data-theme="light"]{
       --bg: #f7fbff; --card: #ffffff; --muted: #475569; --accent: #0ea5a4; --glass: rgba(2,6,23,0.03); --text:#0b1220;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(6,182,212,0.06), transparent),
-                  radial-gradient(900px 400px at 90% 90%, rgba(99,102,241,0.03), transparent),
-                  linear-gradient(180deg,var(--bg),var(--bg));
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui;
+      background: linear-gradient(180deg,var(--bg),var(--bg));
       color:var(--text);
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       padding:32px;
-      display:flex; align-items:flex-start; justify-content:center;
-      gap:16px;
     }
-
     .site{
       width:100%;
       max-width:var(--max-width);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
-
     header{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      display:flex;
+      justify-content:space-between;
       margin-bottom:28px;
     }
     .brand{
-      display:flex; align-items:center; gap:14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
     }
     .logo{
-      width:56px; height:56px; border-radius:14px; background:linear-gradient(135deg,var(--accent),#7c3aed); display:flex; align-items:center; justify-content:center;
-      box-shadow:0 6px 18px rgba(2,6,23,0.3);
-      flex-shrink:0;
-      font-weight:700;
-      font-size:20px;
+      width:56px; height:56px; border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),#7c3aed);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:20px;
     }
     h1{font-size:20px; margin:0}
     p.lead{margin:0; color:var(--muted); font-size:13px}
-
-    .nav{
-      display:flex; gap:12px; align-items:center;
-    }
+    .nav{display:flex; gap:12px; align-items:center;}
     .btn{
       background:var(--glass);
       border:1px solid rgba(255,255,255,0.04);
       color:var(--text);
-      padding:8px 12px; border-radius:10px;
-      font-size:14px; text-decoration:none;
-      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px;
+      border-radius:10px;
+      font-size:14px;
+      text-decoration:none;
     }
-    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.06)}
     .btn.primary{background:linear-gradient(90deg,var(--accent),#7c3aed); color:white; border:none}
     nav a{color:var(--muted); text-decoration:none; font-size:13px}
-
     main{
-      display:grid; gap:20px;
+      display:grid;
+      gap:20px;
       grid-template-columns: 1fr 340px;
-      align-items:start;
+      align-items:center;
     }
-    /* left column */
     .card{
       background:var(--card);
       border-radius:var(--radius);
       padding:18px;
-      box-shadow: 0 6px 30px rgba(2,6,23,0.25);
       border:1px solid rgba(255,255,255,0.02);
     }
-
     .hero{
       display:flex; gap:18px; align-items:center;
     }
     .avatar{
-      width:96px; height:96px; border-radius:14px; background:linear-gradient(135deg,#334155,#0ea5a4);
-      display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:28px;
-      flex-shrink:0;
+      width:96px; height:96px; border-radius:14px;
+      background:linear-gradient(135deg,#334155,#0ea5a4);
+      display:flex; align-items:center; justify-content:center;
+      color:white; font-weight:700; font-size:28px;
     }
     .about h2{margin:0 0 6px 0}
     .muted{color:var(--muted); font-size:14px}
-
-    .projects{
-      display:grid; gap:12px; grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-    }
-    .project{
-      padding:12px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .project h3{margin:0 0 6px 0; font-size:15px}
-    .project p{margin:0; color:var(--muted); font-size:13px}
-
     .skills{display:flex; gap:8px; flex-wrap:wrap}
-    .chip{background:transparent; border:1px solid rgba(255,255,255,0.04); padding:6px 10px; border-radius:999px; font-size:13px; color:var(--muted)}
-
-    /* right column */
+    .chip{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.04);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted)
+    }
     aside .card{position:sticky; top:32px}
     .side-section{display:flex; flex-direction:column; gap:12px}
     .socials{display:flex; gap:10px}
-    .socials a{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:10px; background:var(--glass); text-decoration:none; color:var(--text); font-size:18px}
-    footer{margin-top:26px; color:var(--muted); font-size:13px; text-align:center}
-
-    @media (max-width:980px){
-      main{grid-template-columns: 1fr; }
-      aside .card{position:static; top:auto}
+    .socials a{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:10px;
+      background:var(--glass); text-decoration:none;
+      color:var(--text); font-size:18px
     }
-
-    /* small utilities */
-    .right{margin-left:auto}
-    .muted-sm{color:var(--muted); font-size:12px}
-    .project-links{display:flex; gap:8px; margin-top:8px}
+    footer{margin-top:26px; color:var(--muted); font-size:13px; text-align:center}
+    @media (max-width:980px){
+      main{grid-template-columns: 1fr;}
+      aside .card{position:static}
+    }
     .tiny{font-size:12px; color:var(--muted)}
-    .sr-only{position:absolute!important;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 <body>
-  <div class="site" id="site">
+  <div class="site">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true">GM</div>
+        <div class="logo">GM</div>
         <div>
           <h1>Grant Morfitt</h1>
           <p class="lead">Engineer • Test & Evaluation • Tooling & Simulators</p>
         </div>
       </div>
-
       <div class="nav">
-        <nav aria-label="Main navigation">
-          <a href="#projects">Projects</a> ·
+        <nav>
           <a href="#about">About</a> ·
           <a href="#contact">Contact</a>
         </nav>
-
-        <div style="display:flex; gap:8px; align-items:center; margin-left:12px">
-          <a class="btn ghost" href="resume.pdf" download>Download Résumé</a>
-          <button id="themeToggle" class="btn">🌙 Theme</button>
-        </div>
+        <button id="themeToggle" class="btn">🌙 Theme</button>
       </div>
     </header>
 
     <main>
       <!-- LEFT -->
-      <div class="left-col">
+      <div>
         <section class="card hero" id="about">
-          <div class="avatar" aria-hidden="true">GM</div>
+          <div class="avatar">GM</div>
           <div class="about">
             <h2>Hi — I'm Grant</h2>
-            <p class="muted">I build simulator tooling, data logging GUIs, and test & evaluation systems. I like small utility scripts that save a lot of time and clean UIs that make complicated data easy to understand.</p>
-            <p class="tiny" style="margin-top:10px">Based in the US • Available for contract work & consulting</p>
+            <p class="muted">I build simulator tooling, data logging GUIs, and test & evaluation systems. I like small utility scripts that save time and clean UIs that make complicated data easy to understand.</p>
             <div style="margin-top:12px" class="skills">
               <div class="chip">Python</div>
               <div class="chip">gRPC</div>
@@ -174,70 +149,31 @@
             </div>
           </div>
         </section>
-
-        <section class="card" id="projects" style="margin-top:18px">
-          <h2 style="margin:0 0 12px 0">Selected projects</h2>
-          <div class="projects">
-            <article class="project">
-              <h3>Simulator Session Recorder</h3>
-              <p>Python/tkinter app with gRPC + TOML config for logging flight-sim sensor data to CSV with start/stop/resume controls.</p>
-              <div class="project-links">
-                <a class="tiny" href="#" title="repo">Repo</a>
-                <a class="tiny" href="#" title="demo">Demo</a>
-              </div>
-            </article>
-
-            <article class="project">
-              <h3>DI-2008 Logger</h3>
-              <p>Data-acquisition glue that logs analog and digital channels into time-synced CSV files and visualization tools.</p>
-            </article>
-
-            <article class="project">
-              <h3>FFT Visualizer Notebook</h3>
-              <p>Jupyter notebook for Fourier analysis of CSV signals — interactive zoom & pan and negative frequencies plotted.</p>
-            </article>
-
-            <!-- add more project cards as you like -->
-          </div>
-        </section>
-
-        <section class="card" style="margin-top:18px" id="writing">
-          <h2 style="margin:0 0 12px 0">Writing & Notes</h2>
-          <p class="muted">Short posts, technical notes, and observations from the workshop. <a href="/blog" aria-label="Blog">See blog →</a></p>
-        </section>
       </div>
 
-      <!-- RIGHT / SIDEBAR -->
+      <!-- RIGHT -->
       <aside>
         <div class="card">
           <div class="side-section">
             <div>
-              <h3 style="margin:0 0 8px 0">Get in touch</h3>
-              <p class="muted-sm" id="contact">Email: <a href="mailto:you@example.com">you (at) example.com</a></p>
-              <p class="muted-sm">Open to freelance & contract work.</p>
+              <h3>Get in touch</h3>
+              <p class="tiny" id="contact">Email: <a href="mailto:you@example.com">you@example.com</a></p>
+              <p class="tiny">Open to freelance & contract work.</p>
             </div>
-
             <div>
-              <h4 style="margin:0 0 8px 0">Social</h4>
-              <div class="socials" aria-hidden="false">
-                <a href="https://github.com/yourusername" title="GitHub" aria-label="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/yourname" title="LinkedIn" aria-label="LinkedIn">in</a>
-                <a href="https://twitter.com/yourhandle" title="Twitter" aria-label="Twitter">X</a>
-                <a href="mailto:you@example.com" title="Email" aria-label="Email">✉️</a>
+              <h4>Social</h4>
+              <div class="socials">
+                <a href="https://github.com/yourusername" title="GitHub">GH</a>
+                <a href="https://www.linkedin.com/in/yourname" title="LinkedIn">in</a>
+                <a href="https://twitter.com/yourhandle" title="Twitter">X</a>
+                <a href="mailto:you@example.com" title="Email">✉️</a>
               </div>
             </div>
-
             <div>
-              <h4 style="margin:0 0 8px 0">Quick links</h4>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <a class="btn" href="#projects">Projects</a>
-                <a class="btn ghost" href="resume.pdf" download>Résumé (PDF)</a>
-                <a class="btn ghost" href="/blog">Blog</a>
-              </div>
+              <a class="btn primary" href="https://github.com/yourusername/yourrepo/wiki">Wiki</a>
             </div>
           </div>
         </div>
-
         <footer>
           <div class="tiny">Built with ♥ — hosted on GitHub Pages</div>
           <div class="tiny" style="margin-top:8px">© <span id="year"></span> Grant Morfitt</div>
@@ -247,39 +183,19 @@
   </div>
 
   <script>
-    // Populate year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Theme toggle: remembers preference in localStorage
-    const root = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
-
-    const preferDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const saved = localStorage.getItem('theme'); // "dark" or "light"
-    const initial = saved || (preferDark ? 'dark' : 'light');
-
+    const saved = localStorage.getItem('theme');
+    const initial = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     function applyTheme(theme){
-      document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
       themeToggle.textContent = theme === 'light' ? '🌙 Theme' : '☀️ Theme';
     }
     applyTheme(initial);
-
     themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      const next = current === 'light' ? 'dark' : 'light';
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       localStorage.setItem('theme', next);
       applyTheme(next);
-    });
-
-    // Smooth scrolling for anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({behavior:'smooth', block:'start'});
-        }
-      });
     });
   </script>
 </body>
