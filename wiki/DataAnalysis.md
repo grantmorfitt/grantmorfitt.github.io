@@ -2,8 +2,9 @@
 layout: default
 title: Vertiport Data Analysis Script
 ---
-{% raw %}
+
 '''python
+
 # -*- coding: utf-8 -*-
 """
 @author: Grant Morfitt
@@ -282,6 +283,5 @@ for i,j in enumerate(dataDict):
 outputFrame.to_csv(f'{outputPath}\\output.csv')
 
 '''
-{% endraw %}
 
   
