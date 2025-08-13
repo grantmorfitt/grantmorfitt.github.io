@@ -1,12 +1,9 @@
 title: "Grant Morfitt Wiki"
 theme: minima
-markdown: CommonMarkGhPages
+markdown: kramdown
 highlighter: rouge
 include:
   - wiki
-
-commonmark:
-  options: ["UNSAFE", "FOOTNOTES", "STRIKETHROUGH_DOUBLE_TILDE"]
-  extensions: ["table", "strikethrough", "autolink", "tasklist", "tagfilter"]
-
+kramdown:
+  syntax_highlighter: rouge
 
