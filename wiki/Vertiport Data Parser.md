@@ -2,6 +2,8 @@
 layout: default
 title: Vertiport Data Parser
 ---
+# Script for parsing multiple simulator data files in a folder
+The script parses these files into one large dataframe and correlates it to scenarios that were run during the experiment.
 
 ```python
 # -*- coding: utf-8 -*-
