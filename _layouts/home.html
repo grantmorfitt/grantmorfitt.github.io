@@ -184,6 +184,7 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
   </footer>
   
 
+<canvas id="radar"></canvas>
 <script>
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
@@ -200,9 +201,9 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // Radar center offset to the right
-const radarOffsetX = canvas.width - 400; // adjust as needed
+const radius = 350; // original larger size
+const radarOffsetX = canvas.width - radius - 50; // keep offset from right edge
 const radarOffsetY = canvas.height / 2;
-const radius = 180; // same as before
 
 let sweepAngle = 0;
 const sweepSpeed = 0.01;
@@ -284,12 +285,12 @@ function drawAircraft() {
 
             // White square aircraft symbol
             ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            ctx.fillRect(radarOffsetX + ac.x - 3, radarOffsetY + ac.y - 3, 6, 6);
+            ctx.fillRect(radarOffsetX + ac.x - 4, radarOffsetY + ac.y - 4, 8, 8);
 
             // Flight label in white
-            ctx.font = '10px monospace';
+            ctx.font = '12px monospace';
             ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            ctx.fillText(`${ac.callsign}`, radarOffsetX + ac.x + 8, radarOffsetY + ac.y - 8);
+            ctx.fillText(`${ac.callsign}`, radarOffsetX + ac.x + 10, radarOffsetY + ac.y - 10);
         }
     }
 }
@@ -323,6 +324,7 @@ animate();
   
 </body>
 </html>
+
 
 
 
