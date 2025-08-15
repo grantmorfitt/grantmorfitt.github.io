@@ -12,7 +12,7 @@
     width: 100vw;      
     height: 100vh;       
     background: black;
-    z-index: 0;     
+    z-index: -1;     
     }
     body {
       margin: 0; 
@@ -95,6 +95,7 @@
   </style>
 </head>
 <body>
+  <canvas id="radar"></canvas>
   <main>
     <img
     src="{{ '/assets/avatar.png' | relative_url }}"
@@ -182,7 +183,7 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
     &copy; {{ "now" | date: "%Y" }} Grant Morfitt
   </footer>
   
-<canvas id="radar"></canvas>
+
 <script>
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
@@ -325,6 +326,7 @@ animate();
   
 </body>
 </html>
+
 
 
 
