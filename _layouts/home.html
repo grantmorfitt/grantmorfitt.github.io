@@ -252,8 +252,8 @@ function drawRadarBackground() {
 // Draw sweep
 function drawSweep() {
     const grad = ctx.createRadialGradient(radarOffsetX, radarOffsetY, 0, radarOffsetX, radarOffsetY, radius);
-    grad.addColorStop(0, 'rgba(0,255,0,0.2)');
-    grad.addColorStop(1, 'rgba(0,255,0,0)');
+    grad.addColorStop(0, 'rgba(255,255,255,0.2)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = grad;
     ctx.beginPath();
     ctx.moveTo(radarOffsetX, radarOffsetY);
@@ -324,6 +324,7 @@ animate();
   
 </body>
 </html>
+
 
 
 
