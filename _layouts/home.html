@@ -280,23 +280,23 @@ function drawAircraft() {
             ac.y = -ac.y;
         }
 
-        // Compute angle to aircraft relative to radar center
-        const angleToAc = normalizeAngle(Math.atan2(-ac.y, ac.x)); // flip Y for canvas coords
+        // Compute angle to aircraft relative to radar center (canvas coordinates)
+        const angleToAc = normalizeAngle(Math.atan2(ac.y, ac.x));
         const sweep = normalizeAngle(sweepAngle);
 
-        // Smallest angular difference
+        // Shortest angular difference
         let diff = Math.abs(angleToAc - sweep);
         if (diff > Math.PI) diff = Math.PI*2 - diff;
 
         // Mark aircraft as "seen" by sweep
         if (diff < 0.12) ac.lastSeen = Date.now();
 
-        // Fade out aircraft symbol
+        // Draw aircraft if recently seen
         const age = Date.now() - ac.lastSeen;
         if (age < 1500) {
             const alpha = 1 - age / 1500;
 
-            // Draw aircraft as white square
+            // White square aircraft symbol
             ctx.fillStyle = `rgba(255,255,255,${alpha})`;
             ctx.fillRect(radarOffsetX + ac.x - 4, radarOffsetY + ac.y - 4, 8, 8);
 
@@ -337,6 +337,7 @@ animate();
   
 </body>
 </html>
+
 
 
 
