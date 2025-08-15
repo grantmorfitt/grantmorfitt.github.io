@@ -172,8 +172,76 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
   <footer>
     &copy; {{ "now" | date: "%Y" }} Grant Morfitt
   </footer>
+  <canvas id="radarCanvas" style="position:fixed; top:0; left:0; z-index:-1; width:100%; height:100%;"></canvas>
+
+<script>
+(function() {
+  const canvas = document.getElementById('radarCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // Adjust for screen size
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  let angle = 0;
+
+  function drawRadar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(centerX, centerY) * 0.9;
+
+    // Background
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Radar circles
+    ctx.strokeStyle = "rgba(0,255,0,0.2)";
+    ctx.lineWidth = 2;
+    for (let r = radius / 4; r <= radius; r += radius / 4) {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, r, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+
+    // Crosshairs
+    ctx.beginPath();
+    ctx.moveTo(centerX - radius, centerY);
+    ctx.lineTo(centerX + radius, centerY);
+    ctx.moveTo(centerX, centerY - radius);
+    ctx.lineTo(centerX, centerY + radius);
+    ctx.stroke();
+
+    // Radar sweep
+    const sweepLength = radius;
+    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, sweepLength);
+    gradient.addColorStop(0, 'rgba(0,255,0,0.4)');
+    gradient.addColorStop(1, 'rgba(0,255,0,0)');
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, sweepLength, angle, angle + Math.PI / 12);
+    ctx.closePath();
+    ctx.fill();
+
+    angle += 0.02; // sweep speed
+    requestAnimationFrame(drawRadar);
+  }
+
+  drawRadar();
+})();
+</script>
+
+  
 </body>
 </html>
+
 
 
 
