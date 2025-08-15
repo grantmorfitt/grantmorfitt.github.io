@@ -273,41 +273,39 @@ function drawAircraft() {
         ac.x += Math.cos(ac.heading * Math.PI/180) * speed;
         ac.y += Math.sin(ac.heading * Math.PI/180) * speed;
 
-        // Wrap aircraft back if they leave the radar radius
         const dist = Math.sqrt(ac.x**2 + ac.y**2);
         if (dist > radius) {
             ac.x = -ac.x;
             ac.y = -ac.y;
         }
 
-        // Compute angle to aircraft relative to radar center (canvas coordinates)
-        const angleToAc = normalizeAngle(Math.atan2(ac.y, ac.x));
+        // Compute angle to aircraft
+        let angleToAc = Math.atan2(ac.y, ac.x);
+        if (angleToAc < 0) angleToAc += Math.PI*2;
+
         const sweep = normalizeAngle(sweepAngle);
 
-        // Shortest angular difference
-        let diff = Math.abs(angleToAc - sweep);
-        if (diff > Math.PI) diff = Math.PI*2 - diff;
+        // Correct angular difference
+        let diff = angleToAc - sweep;
+        if (diff < -Math.PI) diff += Math.PI*2;
+        if (diff > Math.PI) diff -= Math.PI*2;
+        diff = Math.abs(diff);
 
-        // Mark aircraft as "seen" by sweep
         if (diff < 0.12) ac.lastSeen = Date.now();
 
-        // Draw aircraft if recently seen
         const age = Date.now() - ac.lastSeen;
         if (age < 1500) {
             const alpha = 1 - age / 1500;
 
-            // White square aircraft symbol
             ctx.fillStyle = `rgba(255,255,255,${alpha})`;
             ctx.fillRect(radarOffsetX + ac.x - 4, radarOffsetY + ac.y - 4, 8, 8);
 
-            // Flight label
             ctx.font = '12px monospace';
             ctx.fillStyle = `rgba(255,255,255,${alpha})`;
             ctx.fillText(`${ac.callsign}`, radarOffsetX + ac.x + 10, radarOffsetY + ac.y - 10);
         }
     }
 }
-
 function animate() {
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -337,6 +335,7 @@ animate();
   
 </body>
 </html>
+
 
 
 
