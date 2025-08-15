@@ -188,25 +188,26 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
 
-// Make canvas fill full screen
+// Full-screen canvas behind everything
 canvas.style.position = 'fixed';
 canvas.style.top = '0';
 canvas.style.left = '0';
 canvas.style.width = '100vw';
 canvas.style.height = '100vh';
-canvas.style.zIndex = '-1'; // behind everything
+canvas.style.zIndex = '-1';
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
-const radius = Math.min(canvas.width, canvas.height) / 2 - 20;
+// Radar offset to the right
+const radarOffsetX = 200; 
+const radarOffsetY = canvas.height / 2;
+const radius = 180;
 
 let sweepAngle = 0;
-const sweepSpeed = 0.01; // slower sweep
+const sweepSpeed = 0.01;
 
-// Aircraft
+// Aircraft setup
 let aircraft = [];
 for (let i = 0; i < 15; i++) {
     aircraft.push({
@@ -225,45 +226,46 @@ function randomCallsign() {
            Math.floor(Math.random()*9000 + 100);
 }
 
-// Draw radar background
+// Draw radar background in white
 function drawRadarBackground() {
-    ctx.strokeStyle = 'rgba(0,255,0,0.3)';
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
     ctx.lineWidth = 1.2;
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI*2);
+    ctx.arc(radarOffsetX, radarOffsetY, radius, 0, Math.PI*2);
     ctx.stroke();
 
     for (let i=1; i<=4; i++) {
         ctx.beginPath();
-        ctx.arc(centerX, centerY, (radius/4)*i, 0, Math.PI*2);
+        ctx.arc(radarOffsetX, radarOffsetY, (radius/4)*i, 0, Math.PI*2);
         ctx.stroke();
     }
 
+    // Cross lines
     ctx.beginPath();
-    ctx.moveTo(centerX - radius, centerY);
-    ctx.lineTo(centerX + radius, centerY);
-    ctx.moveTo(centerX, centerY - radius);
-    ctx.lineTo(centerX, centerY + radius);
+    ctx.moveTo(radarOffsetX - radius, radarOffsetY);
+    ctx.lineTo(radarOffsetX + radius, radarOffsetY);
+    ctx.moveTo(radarOffsetX, radarOffsetY - radius);
+    ctx.lineTo(radarOffsetX, radarOffsetY + radius);
     ctx.stroke();
 }
 
-// Draw sweep
+// Draw sweep (still green)
 function drawSweep() {
-    const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+    const grad = ctx.createRadialGradient(radarOffsetX, radarOffsetY, 0, radarOffsetX, radarOffsetY, radius);
     grad.addColorStop(0, 'rgba(0,255,0,0.2)');
     grad.addColorStop(1, 'rgba(0,255,0,0)');
     ctx.fillStyle = grad;
     ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, radius, sweepAngle, sweepAngle + 0.12);
+    ctx.moveTo(radarOffsetX, radarOffsetY);
+    ctx.arc(radarOffsetX, radarOffsetY, radius, sweepAngle, sweepAngle + 0.12);
     ctx.closePath();
     ctx.fill();
 }
 
-// Draw aircraft with triangle blip and velocity line aligned
+// Draw aircraft with triangle and velocity line
 function drawAircraft() {
     for (let ac of aircraft) {
-        const speed = 0.2; // realistic slower movement
+        const speed = 0.2;
         ac.x += Math.cos(ac.heading * Math.PI/180) * speed;
         ac.y += Math.sin(ac.heading * Math.PI/180) * speed;
 
@@ -282,10 +284,10 @@ function drawAircraft() {
             const alpha = 1 - age/1500;
 
             ctx.save();
-            ctx.translate(centerX + ac.x, centerY + ac.y);
-            ctx.rotate(ac.heading * Math.PI/180);
+            ctx.translate(radarOffsetX + ac.x, radarOffsetY + ac.y);
+            ctx.rotate(ac.heading * Math.PI / 180);
 
-            // Triangle blip
+            // Triangle blip in green
             ctx.fillStyle = `rgba(0,255,0,${alpha})`;
             ctx.beginPath();
             ctx.moveTo(0,-5);
@@ -294,26 +296,25 @@ function drawAircraft() {
             ctx.closePath();
             ctx.fill();
 
-            // Velocity line pointing in same direction as heading
+            // Velocity arrow in green
             ctx.strokeStyle = `rgba(0,255,0,${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.moveTo(0, -5);
-            ctx.lineTo(0, -15);
+            ctx.moveTo(0,0);
+            ctx.lineTo(0,-12);
             ctx.stroke();
 
             ctx.restore();
 
-            // Flight label
+            // Flight label in white
             ctx.font = '10px monospace';
-            ctx.fillStyle = `rgba(0,255,0,${alpha})`;
-            ctx.fillText(`${ac.callsign}`, centerX + ac.x + 8, centerY + ac.y - 8);
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.fillText(`${ac.callsign}`, radarOffsetX + ac.x + 8, radarOffsetY + ac.y - 8);
         }
     }
 }
 
 function animate() {
-    // persistence effect
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
@@ -327,7 +328,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Handle window resize
+// Handle resize
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -343,6 +344,7 @@ animate();
   
 </body>
 </html>
+
 
 
 
