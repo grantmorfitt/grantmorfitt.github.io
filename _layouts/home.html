@@ -6,13 +6,13 @@
   <title>{{ page.title | default: site.title }}</title>
   <style>
     radar {
-    position: fixed; /* or relative/fixed depending on your layout */
-    right: 0;           /* place on the right */
+    position: fixed; 
+    right: 0;           
     top: 0;
-    width: 400px;       /* adjust as needed */
-    height: 400px;      /* adjust as needed */
+    width: 100vw;      
+    height: 100vh;       
     background: black;
-    z-index: 0;      /* ensure it’s above other elements */
+    z-index: 0;     
     }
     body {
       margin: 0; 
@@ -181,23 +181,23 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
   <footer>
     &copy; {{ "now" | date: "%Y" }} Grant Morfitt
   </footer>
+  
 <canvas id="radar"></canvas>
-
-
 <script>
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
 
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-const centerX = canvas.width - 400;
+const centerX = canvas.width / 2;
 const centerY = canvas.height / 2;
-const radius = 350;
+const radius = 180;
 
 let sweepAngle = 0;
-const sweepSpeed = 0.015;
+const sweepSpeed = 0.01; // slower sweep
 
+// Aircraft
 let aircraft = [];
 for (let i = 0; i < 15; i++) {
     aircraft.push({
@@ -216,43 +216,32 @@ function randomCallsign() {
            Math.floor(Math.random() * 9000 + 100);
 }
 
+// Draw background radar
 function drawRadarBackground() {
-    // Radar circle
     ctx.strokeStyle = 'rgba(0,255,0,0.3)';
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.2;
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
     ctx.stroke();
 
-    // Range rings
     for (let i = 1; i <= 4; i++) {
         ctx.beginPath();
         ctx.arc(centerX, centerY, (radius / 4) * i, 0, Math.PI * 2);
         ctx.stroke();
     }
 
-    // Cross lines
     ctx.beginPath();
     ctx.moveTo(centerX - radius, centerY);
     ctx.lineTo(centerX + radius, centerY);
     ctx.moveTo(centerX, centerY - radius);
     ctx.lineTo(centerX, centerY + radius);
     ctx.stroke();
-
-    // Subtle grid lines (every 45°)
-    for (let angle = 0; angle < 360; angle += 45) {
-        const rad = angle * Math.PI / 180;
-        ctx.beginPath();
-        ctx.moveTo(centerX, centerY);
-        ctx.lineTo(centerX + radius * Math.cos(rad), centerY + radius * Math.sin(rad));
-        ctx.strokeStyle = 'rgba(0,255,0,0.1)';
-        ctx.stroke();
-    }
 }
 
+// Draw sweep
 function drawSweep() {
     const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-    grad.addColorStop(0, 'rgba(0,255,0,0.25)');
+    grad.addColorStop(0, 'rgba(0,255,0,0.2)');
     grad.addColorStop(1, 'rgba(0,255,0,0)');
     ctx.fillStyle = grad;
     ctx.beginPath();
@@ -262,9 +251,10 @@ function drawSweep() {
     ctx.fill();
 }
 
+// Draw aircraft blip as triangle with heading vector
 function drawAircraft() {
     for (let ac of aircraft) {
-        const speed = 0.5;
+        const speed = 0.2; // slower movement
         ac.x += Math.cos(ac.heading * Math.PI / 180) * speed;
         ac.y += Math.sin(ac.heading * Math.PI / 180) * speed;
 
@@ -281,19 +271,37 @@ function drawAircraft() {
         const age = Date.now() - ac.lastSeen;
         if (age < 1500) {
             const alpha = 1 - age / 1500;
+
+            // Draw triangle blip
+            ctx.save();
+            ctx.translate(centerX + ac.x, centerY + ac.y);
+            ctx.rotate(ac.heading * Math.PI / 180);
             ctx.fillStyle = `rgba(0,255,0,${alpha})`;
             ctx.beginPath();
-            ctx.arc(centerX + ac.x, centerY + ac.y, 5, 0, Math.PI * 2);
+            ctx.moveTo(0, -5);
+            ctx.lineTo(3, 5);
+            ctx.lineTo(-3, 5);
+            ctx.closePath();
             ctx.fill();
 
+            // Draw heading vector
+            ctx.strokeStyle = `rgba(0,255,0,${alpha})`;
+            ctx.beginPath();
+            ctx.moveTo(0, -5);
+            ctx.lineTo(0, -15);
+            ctx.stroke();
+
+            ctx.restore();
+
+            // Optional: flight label
+            ctx.font = '10px monospace';
             ctx.fillStyle = `rgba(0,255,0,${alpha})`;
-            ctx.fillText(`${ac.callsign} ${ac.heading.toFixed(0)}° ${ac.altitude}`, centerX + ac.x + 10, centerY + ac.y - 10);
+            ctx.fillText(`${ac.callsign}`, centerX + ac.x + 8, centerY + ac.y - 8);
         }
     }
 }
 
 function animate() {
-    // Darken previous frame slightly for persistence
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -313,9 +321,11 @@ animate();
 
 
 
+
   
 </body>
 </html>
+
 
 
 
