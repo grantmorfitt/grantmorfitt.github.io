@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ page.title | default: site.title }}</title>
   <style>
+    
     body {
       margin: 0; 
       font-family: Arial, sans-serif; 
@@ -172,112 +173,132 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
   <footer>
     &copy; {{ "now" | date: "%Y" }} Grant Morfitt
   </footer>
-  <canvas id="radarCanvas" style="position:fixed; top:0; left:0; z-index:-1; width:100%; height:100%;"></canvas>
+<canvas id="radar"></canvas>
+
 
 <script>
-(function() {
-  const canvas = document.getElementById('radarCanvas');
-  const ctx = canvas.getContext('2d');
+const canvas = document.getElementById('radar');
+const ctx = canvas.getContext('2d');
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  let angle = 0;
+const centerX = canvas.width - 400; // position radar on the right
+const centerY = canvas.height / 2;
+const radius = 350;
 
-  const blipCount = 15;
-  const blips = [];
-  const centerX = () => canvas.width * 0.75; // moved right
-  const centerY = () => canvas.height / 2;
-  
-  const maxRadius = () => Math.min(canvas.width, canvas.height) * 0.48;
+let sweepAngle = 0;
+const sweepSpeed = 0.02; // radians per frame
 
-  for (let i = 0; i < blipCount; i++) {
-    const r = Math.random() * maxRadius();
-    const theta = Math.random() * Math.PI * 2;
-    blips.push({
-      x: r * Math.cos(theta),
-      y: r * Math.sin(theta),
-      intensity: 0
+// Aircraft list
+let aircraft = [];
+for (let i = 0; i < 15; i++) {
+    aircraft.push({
+        x: (Math.random() - 0.5) * radius * 1.8,
+        y: (Math.random() - 0.5) * radius * 1.8,
+        heading: Math.random() * 360,
+        callsign: randomCallsign(),
+        altitude: Math.floor(Math.random() * 300) * 100 + 1000,
+        lastSeen: 0
     });
-  }
+}
 
-  function drawRadar() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function randomCallsign() {
+    const airlines = ["DAL", "AAL", "UAL", "SWA", "JBU", "ASA"];
+    const airline = airlines[Math.floor(Math.random() * airlines.length)];
+    const flightNum = Math.floor(Math.random() * 9000 + 100);
+    return airline + flightNum;
+}
 
-    const cX = centerX();
-    const cY = centerY();
-    const radius = maxRadius();
-
-    // Background
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // Circles
-    ctx.strokeStyle = "rgba(0,255,0,0.2)";
-    ctx.lineWidth = 2;
-    for (let r = radius / 5; r <= radius; r += radius / 5) {
-      ctx.beginPath();
-      ctx.arc(cX, cY, r, 0, 2 * Math.PI);
-      ctx.stroke();
-    }
-
-    // Crosshairs
+function drawRadarBackground() {
+    ctx.strokeStyle = 'rgba(0,255,0,0.3)';
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(cX - radius, cY);
-    ctx.lineTo(cX + radius, cY);
-    ctx.moveTo(cX, cY - radius);
-    ctx.lineTo(cX, cY + radius);
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
     ctx.stroke();
 
-    // Blips
-    blips.forEach(blip => {
-      const bx = cX + blip.x;
-      const by = cY + blip.y;
-      if (blip.intensity > 0) {
-        ctx.fillStyle = `rgba(0,255,0,${blip.intensity})`;
+    // Range rings
+    for (let i = 1; i <= 3; i++) {
         ctx.beginPath();
-        ctx.arc(bx, by, 4, 0, 2 * Math.PI);
-        ctx.fill();
-        blip.intensity -= 0.02;
-      }
-    });
+        ctx.arc(centerX, centerY, (radius / 4) * i, 0, Math.PI * 2);
+        ctx.stroke();
+    }
 
-    // Sweep
-    const gradient = ctx.createRadialGradient(cX, cY, 0, cX, cY, radius);
-    gradient.addColorStop(0, 'rgba(0,255,0,0.4)');
-    gradient.addColorStop(1, 'rgba(0,255,0,0)');
-
-    ctx.fillStyle = gradient;
+    // Cross lines
     ctx.beginPath();
-    ctx.moveTo(cX, cY);
-    ctx.arc(cX, cY, radius, angle, angle + Math.PI / 12);
+    ctx.moveTo(centerX - radius, centerY);
+    ctx.lineTo(centerX + radius, centerY);
+    ctx.moveTo(centerX, centerY - radius);
+    ctx.lineTo(centerX, centerY + radius);
+    ctx.stroke();
+}
+
+function drawSweep() {
+    const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+    grad.addColorStop(0, 'rgba(0,255,0,0.3)');
+    grad.addColorStop(1, 'rgba(0,255,0,0)');
+
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, sweepAngle, sweepAngle + 0.15);
     ctx.closePath();
     ctx.fill();
+}
 
-    // Trigger blips
-    blips.forEach(blip => {
-      const bx = cX + blip.x;
-      const by = cY + blip.y;
-      const dx = bx - cX;
-      const dy = by - cY;
-      const blipAngle = Math.atan2(dy, dx);
-      let diff = blipAngle - angle;
-      diff = (diff + Math.PI * 2) % (Math.PI * 2);
-      if (diff < 0.05) {
-        blip.intensity = 1;
-      }
-    });
+function drawAircraft() {
+    for (let ac of aircraft) {
+        // Move aircraft
+        const speed = 0.5; // px per frame
+        ac.x += Math.cos(ac.heading * Math.PI / 180) * speed;
+        ac.y += Math.sin(ac.heading * Math.PI / 180) * speed;
 
-    angle += 0.02;
-    requestAnimationFrame(drawRadar);
-  }
+        // Wrap aircraft around radar
+        const dist = Math.sqrt(ac.x ** 2 + ac.y ** 2);
+        if (dist > radius) {
+            ac.x = -ac.x;
+            ac.y = -ac.y;
+        }
 
-  drawRadar();
-})();
+        // Check if sweep is near aircraft
+        const angleToAc = Math.atan2(ac.y, ac.x);
+        const diff = Math.abs(((angleToAc - sweepAngle + Math.PI * 2) % (Math.PI * 2)));
+        if (diff < 0.15) {
+            ac.lastSeen = Date.now();
+        }
+
+        // Fade blip
+        const age = Date.now() - ac.lastSeen;
+        if (age < 1000) {
+            const alpha = 1 - age / 1000;
+            ctx.fillStyle = `rgba(0,255,0,${alpha})`;
+            ctx.beginPath();
+            ctx.arc(centerX + ac.x, centerY + ac.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Flight data
+            ctx.font = '12px monospace';
+            ctx.fillStyle = `rgba(0,255,0,${alpha})`;
+            ctx.fillText(`${ac.callsign} ${ac.heading.toFixed(0)}° ${ac.altitude}`, centerX + ac.x + 8, centerY + ac.y - 8);
+        }
+    }
+}
+
+function animate() {
+    ctx.fillStyle = 'rgba(0,0,0,0.3)'; // slight persistence
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    drawRadarBackground();
+    drawSweep();
+    drawAircraft();
+
+    sweepAngle += sweepSpeed;
+    if (sweepAngle > Math.PI * 2) sweepAngle -= Math.PI * 2;
+
+    requestAnimationFrame(animate);
+}
+
+animate();
 </script>
 
 
@@ -286,6 +307,7 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
   
 </body>
 </html>
+
 
 
 
