@@ -188,7 +188,7 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
 
-// Full-screen canvas behind everything
+// Full-screen background
 canvas.style.position = 'fixed';
 canvas.style.top = '0';
 canvas.style.left = '0';
@@ -199,10 +199,10 @@ canvas.style.zIndex = '-1';
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Radar offset to the right
-const radarOffsetX = 200; 
+// Radar center offset to the right
+const radarOffsetX = canvas.width - 400; // adjust as needed
 const radarOffsetY = canvas.height / 2;
-const radius = 180;
+const radius = 180; // same as before
 
 let sweepAngle = 0;
 const sweepSpeed = 0.01;
@@ -240,7 +240,6 @@ function drawRadarBackground() {
         ctx.stroke();
     }
 
-    // Cross lines
     ctx.beginPath();
     ctx.moveTo(radarOffsetX - radius, radarOffsetY);
     ctx.lineTo(radarOffsetX + radius, radarOffsetY);
@@ -249,7 +248,7 @@ function drawRadarBackground() {
     ctx.stroke();
 }
 
-// Draw sweep (still green)
+// Draw sweep
 function drawSweep() {
     const grad = ctx.createRadialGradient(radarOffsetX, radarOffsetY, 0, radarOffsetX, radarOffsetY, radius);
     grad.addColorStop(0, 'rgba(0,255,0,0.2)');
@@ -262,7 +261,7 @@ function drawSweep() {
     ctx.fill();
 }
 
-// Draw aircraft with triangle and velocity line
+// Draw aircraft as white squares
 function drawAircraft() {
     for (let ac of aircraft) {
         const speed = 0.2;
@@ -283,28 +282,9 @@ function drawAircraft() {
         if (age < 1500) {
             const alpha = 1 - age/1500;
 
-            ctx.save();
-            ctx.translate(radarOffsetX + ac.x, radarOffsetY + ac.y);
-            ctx.rotate(ac.heading * Math.PI / 180);
-
-            // Triangle blip in green
-            ctx.fillStyle = `rgba(0,255,0,${alpha})`;
-            ctx.beginPath();
-            ctx.moveTo(0,-5);
-            ctx.lineTo(3,5);
-            ctx.lineTo(-3,5);
-            ctx.closePath();
-            ctx.fill();
-
-            // Velocity arrow in green
-            ctx.strokeStyle = `rgba(0,255,0,${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(0,0);
-            ctx.lineTo(0,-12);
-            ctx.stroke();
-
-            ctx.restore();
+            // White square aircraft symbol
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.fillRect(radarOffsetX + ac.x - 3, radarOffsetY + ac.y - 3, 6, 6);
 
             // Flight label in white
             ctx.font = '10px monospace';
@@ -340,10 +320,10 @@ animate();
 
 
 
-
   
 </body>
 </html>
+
 
 
 
