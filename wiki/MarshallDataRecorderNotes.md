@@ -28,7 +28,7 @@ The second component is the Spatial FOG Dual device which records GNSS and inert
 
 ## DI-2008 Data
 
-<img src="../assets/controls_layout.jpg" alt="Helicopter Setup" width="300" height="200">
+<img src="../assets/controls_layout.jpg" alt="Helicopter Setup" width=40% height=50%>
 Shown above is the set up for the helicopter controls. Four string potentiometers are connected to the DI-2008 channels 1-4. 
 
 
