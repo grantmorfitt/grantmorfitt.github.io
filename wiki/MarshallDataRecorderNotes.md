@@ -5,10 +5,10 @@ title: Marshall Data Recorder Notes
 
 # Marshall Data Recorder and Data Formatting Notes **(IN PROGRESS)**
 
-<a href="example.txt" download="wiki/MarshallDataRecorderNotes.md" style="
+<a href="wiki/MarshallDataRecorderNotes.md" download="wiki/MarshallDataRecorderNotes.md" style="
   display: inline-block;
-  padding: 8px 16px;
-  background-color: #28a745;
+  padding: 8px 10px;
+  background-color: ##e3342f;
   color: white;
   font-weight: bold;
   border-radius: 6px;
