@@ -28,16 +28,24 @@ The second component is the Spatial FOG Dual device which records GNSS and inert
 
 ## DI-2008 Data
 
-<img src="../assets/controls_layout.jpg" alt="Helicopter Setup" width=40% height=50%>
+<img src="../assets/controls_layout.jpg" alt="Helicopter Setup" width="40%" height="50%">
 
 &nbsp;
 
 Shown above is the set up for the helicopter controls. Four string potentiometers (subsequently referred to as string pots) are connected to the DI-2008 channels 1-4. 
 Depending on the channel you are investigating in the data, an increase in voltage might not consistently be the same control direction. Please reference the below section for details. Each string pot is labelled with a box, and the string connection is shown with a line.
 
-<img src="../assets/controls_layout_label.jpg" alt="Helicopter Setup Labelled" width=40% height=50%>
+<img src="../assets/controls_layout_label.jpg" alt="Helicopter Setup Labelled" width="40%" height="50%">
 
 One pot is connected to the right pedal (A). One is connected from the right side of the cockpit to the right side of the cyclic via a magnet (B). The third string potentiometer to collect the pitch of the cyclic is connected from under the seat of the instructor pilot (C). This is secured in a similar fashion with a magnet to the aft portion of the cyclic. Finally the last string potentiometer is connected to the cyclic from the floor of the aircaft (D).
+### Breaking it down further:
+An increase in voltage for a string potentiometer occurs when the string potentiometer is extended. 
++ For A, or pedal control,  it implies a control movement forward on the right pedal. Thusly, a forward input in right pedal shows an increase in voltage. A forward input in left pedal would show as a decrease in voltage on the pedal measurement.
++ For B, or the cyclic bank control, a left bank will show as an increase in voltage. For a right bank, it will show as a decrease in voltage.
++ For C, or the cyclic pitch control, an increase will dictate a forward pitch. A decrease in voltage will indicate the pilot pulling the cyclic aft, which would indicate an aft pitch.
+For D, or the collective control, an increase in voltage indicates the collective is being pulled up. A decrease in voltage indicates the collective has been moved down.
+
+To summarize:
 
 
 
