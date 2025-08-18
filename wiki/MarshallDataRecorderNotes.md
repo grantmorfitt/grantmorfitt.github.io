@@ -5,7 +5,7 @@ title: Marshall Data Recorder Notes
 
 # Marshall Data Recorder and Data Formatting Notes **(IN PROGRESS)**
 
-<a href="(https://raw.githubusercontent.com/grantmorfitt/grantmorfitt.github.io/refs/heads/main/wiki/MarshallDataRecorderNotes.md)" style="
+<a href="https://raw.githubusercontent.com/grantmorfitt/grantmorfitt.github.io/refs/heads/main/wiki/MarshallDataRecorderNotes.md" style="
   display: inline-block;
   padding: 0px 10px;
   background-color:#e3342f;
@@ -38,6 +38,7 @@ Depending on the channel you are investigating in the data, an increase in volta
 <img src="../assets/controls_layout_label.jpg" alt="Helicopter Setup Labelled" width="40%" height="50%">
 
 One pot is connected to the right pedal (A). One is connected from the right side of the cockpit to the right side of the cyclic via a magnet (B). The third string potentiometer to collect the pitch of the cyclic is connected from under the seat of the instructor pilot (C). This is secured in a similar fashion with a magnet to the aft portion of the cyclic. Finally the last string potentiometer is connected to the cyclic from the floor of the aircaft (D).
+
 ### Breaking it down further:
 An increase in voltage for a string potentiometer occurs when the string potentiometer is extended. 
 + For A, or pedal control,  it implies a control movement forward on the right pedal. Thusly, a forward input in right pedal shows an increase in voltage. A forward input in left pedal would show as a decrease in voltage on the pedal measurement.
@@ -45,7 +46,23 @@ An increase in voltage for a string potentiometer occurs when the string potenti
 + For C, or the cyclic pitch control, an increase will dictate a forward pitch. A decrease in voltage will indicate the pilot pulling the cyclic aft, which would indicate an aft pitch.
 For D, or the collective control, an increase in voltage indicates the collective is being pulled up. A decrease in voltage indicates the collective has been moved down.
 
+In the below table, negative voltage does not imply a negative voltage. Rather, it implies a voltage decrease. The same occurs with positive voltage. Voltages will be positive during the entire file. If for some reason you obtain a negative voltage, something is wrong.
+
 To summarize:
+
+| Control    | Label          | Movement                | Effect on output data |
+|------------|----------------|-------------------------|-----------------------|
+| Pedal      |A               |Increase right pedal     | +V                    |
+| Pedal      |A               |Decrease right pedal     | -V                    |
+| Pedal      |A               |Increase left pedal      | -V                    |
+| Pedal      |A               |Decrease left pedal      | +V                    |
+| Cyclic Bank|B               |Left Bank                | +V                    |
+| Cyclic Bank|B               |Right Bank               | -V                    |
+| Cyclic Pitch|C               | Forward Pitch          | +V                    |
+| Cyclic Pitch|C               | Aft pitch              | -V                    |   
+| Collective | D              | Increase coll.          | +V                    |
+| Collective | D              | Decrease coll.          | -V                    |
+
 
 
 
