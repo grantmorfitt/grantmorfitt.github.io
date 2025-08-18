@@ -74,7 +74,7 @@ To summarize:
 
 ## Spatial FOG Dual
 The Marshall Data recorder script I wrote directly takes the binary from the Spatial Fog device and saved it to a propriatary .anpp format. .anpp files must be converted by Spatial Fog Manager Log Converter to get GNSS/Sensor Logs from Advanced Navigation device
-[Spatial Fog Manager](https://www.advancednavigation.com/inertial-navigation-systems/fog-gnss-ins/spatial-fog-dual/#h-downloads)
+[Spatial Fog Manager](https://www.advancednavigation.com/inertial-navigation-systems/fog-gnss-ins/spatial-fog-dual/#h-downloads/)
 
 Please note that **Java 11 is required to run Spatial FOG Manager**. This caveat is noted on the website under the download page.
 
