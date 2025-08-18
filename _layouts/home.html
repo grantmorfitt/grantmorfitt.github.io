@@ -204,7 +204,7 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
 <script>
 const metarDiv = document.getElementById('metar-overlay');
 
-// Replace with your AVWX API key
+
 const apiKey = "lupgSAUhyDVXzw74iRWmARC7S6qX0lp_uAju-OeDhOg";
 const station = "KACY";
 
@@ -230,7 +230,7 @@ async function fetchMetar() {
         const flight_rules = `Flight Rules: ${data.flight_rules ?? '-'}`;
 
         // Combine
-        metarDiv.textContent = `${raw}\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
+        metarDiv.textContent = `$KACY METAR\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
 
     } catch (err) {
         metarDiv.textContent = "Error loading METAR";
