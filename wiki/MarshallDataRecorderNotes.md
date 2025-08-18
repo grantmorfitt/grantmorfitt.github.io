@@ -56,10 +56,10 @@ To summarize:
 | Pedal      |A               |Decrease right pedal     | -V                    |
 | Pedal      |A               |Increase left pedal      | -V                    |
 | Pedal      |A               |Decrease left pedal      | +V                    |
-| Cyclic Bank|B               |Left Bank                | +V                    |
-| Cyclic Bank|B               |Right Bank               | -V                    |
-| Cyclic Pitch|C               | Forward Pitch          | +V                    |
-| Cyclic Pitch|C               | Aft pitch              | -V                    |   
+| Cyclic Bank |B               |Left Bank                | +V                    |
+| Cyclic Bank |B               |Right Bank               | -V                    |
+| Cyclic Pitch |C               | Forward Pitch          | +V                    |
+| Cyclic Pitch |C               | Aft pitch              | -V                    |   
 | Collective | D              | Increase coll.          | +V                    |
 | Collective | D              | Decrease coll.          | -V                    |
 
