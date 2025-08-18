@@ -184,6 +184,67 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
   </footer>
   
 
+<!-- METAR overlay div -->
+<div id="metar-overlay" style="
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: monospace;
+    color: lime;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 14px;
+    border-radius: 6px;
+    z-index: 10;
+    white-space: pre;
+    line-height: 1.4em;
+">
+    Loading KACY METAR...
+</div>
+
+<script>
+const metarDiv = document.getElementById('metar-overlay');
+
+// Replace with your AVWX API key
+const apiKey = "lupgSAUhyDVXzw74iRWmARC7S6qX0lp_uAju-OeDhOg";
+const station = "KACY";
+
+async function fetchMetar() {
+    try {
+        const response = await fetch(`https://avwx.rest/api/metar/${station}?format=json&onfail=cache`, {
+            headers: { "Authorization": apiKey }
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch METAR");
+
+        const data = await response.json();
+
+        // Raw METAR
+        const raw = `Raw: ${data.raw_text}`;
+
+        // Decoded METAR info
+        const wind = `Wind: ${data.wind_direction?.value ?? '-'}° at ${data.wind_speed?.value ?? '-'} ${data.wind_speed?.units ?? ''}`;
+        const visibility = `Visibility: ${data.visibility?.value ?? '-'} ${data.visibility?.units ?? ''}`;
+        const temp = `Temp: ${data.temperature?.value ?? '-'}°C`;
+        const dew = `Dew Pt: ${data.dewpoint?.value ?? '-'}°C`;
+        const altimeter = `Altimeter: ${data.altimeter?.value ?? '-'} ${data.altimeter?.units ?? ''}`;
+        const flight_rules = `Flight Rules: ${data.flight_rules ?? '-'}`;
+
+        // Combine
+        metarDiv.textContent = `${raw}\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
+
+    } catch (err) {
+        metarDiv.textContent = "Error loading METAR";
+        console.error(err);
+    }
+}
+
+// Initial fetch
+fetchMetar();
+
+// Refresh every 5 minutes
+setInterval(fetchMetar, 5 * 60 * 1000);
+</script>
+
 <canvas id="radar"></canvas>
 <script>
 const canvas = document.getElementById('radar');
