@@ -66,16 +66,6 @@ To summarize:
 
 
 
-
-
-
-
-Control Position Voltages:
-+ **Pitch:** Increase voltage is pitch forward on cyclic. 
-+ **Roll:** Increase voltage is cyclic roll to left
-+ **Pedal:** Increase in voltage is increase in right rudder
-+ **Collective:** Increase in voltage is collective up
-
 ## Dual Spatial Fog Data
 The Marshall Data recorder script I wrote directly takes the binary from the Spatial Fog device and saved it to a propriatary .anpp format. .anpp files must be converted by Spatial Fog Manager Log Converter to get GNSS/Sensor Logs from Advanced Navigation device
 https://www.advancednavigation.com/inertial-navigation-systems/fog-gnss-ins/spatial-fog-dual/#h-downloads
