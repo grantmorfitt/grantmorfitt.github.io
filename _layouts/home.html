@@ -201,12 +201,50 @@ onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; th
     Loading KACY METAR...
 </div>
 
+<!-- METAR overlay div -->
+<div id="metar-overlay" style="
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: monospace;
+    color: lime;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px 14px;
+    border-radius: 6px;
+    z-index: 10;
+    white-space: pre;
+    line-height: 1.4em;
+">
+    Loading KACY METAR...
+</div>
+
 <script>
 const metarDiv = document.getElementById('metar-overlay');
-
-
 const apiKey = "lupgSAUhyDVXzw74iRWmARC7S6qX0lp_uAju-OeDhOg";
 const station = "KACY";
+
+function padWindDirection(value) {
+    if (value === undefined || value === null) return "---";
+    return String(value).padStart(3, "0");
+}
+
+function windArrow(degrees) {
+    if (degrees === undefined || degrees === null) return "↑";
+    // Arrow rotation using Unicode compass arrows
+    // Simple approximation to 8 cardinal directions
+    const dir = (Math.round(degrees / 45) * 45) % 360;
+    switch (dir) {
+        case 0: return "↑";
+        case 45: return "↗";
+        case 90: return "→";
+        case 135: return "↘";
+        case 180: return "↓";
+        case 225: return "↙";
+        case 270: return "←";
+        case 315: return "↖";
+        default: return "↑";
+    }
+}
 
 async function fetchMetar() {
     try {
@@ -218,19 +256,23 @@ async function fetchMetar() {
 
         const data = await response.json();
 
-        // Raw METAR
-        const raw = `Raw: ${data.raw_text}`;
+        const raw = data.raw_text ?? "Raw METAR unavailable";
 
-        // Decoded METAR info
-        const wind = `Wind: ${data.wind_direction?.value ?? '-'}° at ${data.wind_speed?.value ?? '-'} ${data.wind_speed?.units ?? ''}`;
+        // Wind direction padded
+        const windDir = padWindDirection(data.wind_direction?.value);
+        const windSpeed = data.wind_speed?.value ?? "-";
+        const windUnits = data.wind_speed?.units ?? "";
+        const windSym = windArrow(data.wind_direction?.value);
+        const wind = `Wind: ${windDir}° ${windSym} at ${windSpeed} ${windUnits}`;
+
         const visibility = `Visibility: ${data.visibility?.value ?? '-'} ${data.visibility?.units ?? ''}`;
         const temp = `Temp: ${data.temperature?.value ?? '-'}°C`;
         const dew = `Dew Pt: ${data.dewpoint?.value ?? '-'}°C`;
         const altimeter = `Altimeter: ${data.altimeter?.value ?? '-'} ${data.altimeter?.units ?? ''}`;
         const flight_rules = `Flight Rules: ${data.flight_rules ?? '-'}`;
+        const obsTime = formatObservationTime(data.time?.dt);
 
-        // Combine
-        metarDiv.textContent = `$KACY METAR\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
+        metarDiv.textContent = `$KACY METAR\n${obsTime} zulu\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
 
     } catch (err) {
         metarDiv.textContent = "Error loading METAR";
@@ -238,10 +280,7 @@ async function fetchMetar() {
     }
 }
 
-// Initial fetch
 fetchMetar();
-
-// Refresh every 5 minutes
 setInterval(fetchMetar, 5 * 60 * 1000);
 </script>
 
