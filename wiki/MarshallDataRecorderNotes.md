@@ -26,6 +26,12 @@ The DI-2008 is a Voltage Data Acquisition System that collects voltages from fiv
 
 The second component is the Spatial FOG Dual device which records GNSS and inertial measurement data. This data is pushed to a proprietary binary file (.anpp) as defined by Advanced Navigation. Specifics are outlined in the sections below. This unit utilized two GNSS receivers, one primary and one secondary, to properly capture GPS satellite data.
 
+## Files
+The recorder script will directly generate three files from the recording
++ ControlPos_YYY-MM-DD_HH-MM-SS_FlightName.csv - Control positions, from DI-2008 Recorder
++ ManeuverLog_YYY-MM-DD_HH-MM-SS__FlightName.csv - Record of maneuevers and comments as recorded by observer
++ SpatialFOG_YYY-MM-DD_HH-MM-SS__FlightName.anpp - Binary file of GNSS/IMS from spatial fog 
+
 ## DI-2008 Data
 
 <img src="../assets/controls_layout.jpg" alt="Helicopter Setup" width="40%" height="50%">
