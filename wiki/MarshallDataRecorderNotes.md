@@ -5,7 +5,7 @@ title: Marshall Data Recorder Notes
 
 # Marshall Data Recorder and Data Formatting Notes **(IN PROGRESS)**
 
-<a href="[wiki/MarshallDataRecorderNotes.md](https://raw.githubusercontent.com/grantmorfitt/grantmorfitt.github.io/refs/heads/main/wiki/MarshallDataRecorderNotes.md)" style="
+<a href="(https://raw.githubusercontent.com/grantmorfitt/grantmorfitt.github.io/refs/heads/main/wiki/MarshallDataRecorderNotes.md)" style="
   display: inline-block;
   padding: 0px 10px;
   background-color:#e3342f;
@@ -29,15 +29,27 @@ The second component is the Spatial FOG Dual device which records GNSS and inert
 ## DI-2008 Data
 
 <img src="../assets/controls_layout.jpg" alt="Helicopter Setup" width=40% height=50%>
-Shown above is the set up for the helicopter controls. Four string potentiometers are connected to the DI-2008 channels 1-4. 
+
+&nbsp;
+
+Shown above is the set up for the helicopter controls. Four string potentiometers (subsequently referred to as string pots) are connected to the DI-2008 channels 1-4. 
+Depending on the channel you are investigating in the data, an increase in voltage might not consistently be the same control direction. Please reference the below section for details. Each string pot is labelled with a box, and the string connection is shown with a line.
+
+<img src="../assets/controls_layout_label.jpg" alt="Helicopter Setup Labelled" width=40% height=50%>
+
+One pot is connected to the right pedal (A). One is connected from the right side of the cockpit to the right side of the cyclic via a magnet (B). The third string potentiometer to collect the pitch of the cyclic is connected from under the seat of the instructor pilot (C). This is secured in a similar fashion with a magnet to the aft portion of the cyclic. Finally the last string potentiometer is connected to the cyclic from the floor of the aircaft (D).
+
+
+
+
 
 
 
 Control Position Voltages:
-**Pitch:** Increase voltage is pitch forward on cyclic. 
-**Roll:** Increase voltage is cyclic roll to left
-**Pedal:** Increase in voltage is increase in right rudder
-**Collective:** Increase in voltage is collective up
++ **Pitch:** Increase voltage is pitch forward on cyclic. 
++ **Roll:** Increase voltage is cyclic roll to left
++ **Pedal:** Increase in voltage is increase in right rudder
++ **Collective:** Increase in voltage is collective up
 
 ## Dual Spatial Fog Data
 The Marshall Data recorder script I wrote directly takes the binary from the Spatial Fog device and saved it to a propriatary .anpp format. .anpp files must be converted by Spatial Fog Manager Log Converter to get GNSS/Sensor Logs from Advanced Navigation device
