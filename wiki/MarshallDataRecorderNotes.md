@@ -5,6 +5,7 @@ title: Marshall Data Recorder Notes
 
 # Marshall Data Recorder and Data Formatting Notes **(IN PROGRESS)**
 
+To download, right click -> save link as
 <a href="https://raw.githubusercontent.com/grantmorfitt/grantmorfitt.github.io/refs/heads/main/wiki/MarshallDataRecorderNotes.md" style="
   display: inline-block;
   padding: 0px 10px;
