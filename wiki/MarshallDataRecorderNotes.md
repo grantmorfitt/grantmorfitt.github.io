@@ -51,7 +51,7 @@ In the below table, negative voltage does not imply a negative voltage. Rather, 
 To summarize:
 
 | Control    | Label          | Movement                | Effect on output data |
-|------------|----------------|-------------------------|-----------------------|
+|:------------:|:----------------:|:-------------------------:|:-----------------------:|
 | Pedal      |A               |Increase right pedal     | +V                    |
 | Pedal      |A               |Decrease right pedal     | -V                    |
 | Pedal      |A               |Increase left pedal      | -V                    |
