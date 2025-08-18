@@ -232,7 +232,7 @@ function windArrow(degrees) {
 function formatObservationTime(isoString) {
     if (!isoString) return "Observation Time: ---";
     const dt = new Date(isoString);
-    return `Observation Time: ${dt.toUTCString()}`;
+    return `${dt.toUTCString()} zulu`;
 }
 
 async function fetchMetar() {
@@ -261,7 +261,7 @@ async function fetchMetar() {
         const flight_rules = `Flight Rules: ${data.flight_rules ?? '-'}`;
         const obsTime = formatObservationTime(data.time?.dt);
 
-        metarDiv.textContent = `KACY METAR\n${obsTime} zulu\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
+        metarDiv.textContent = `KACY METAR\n${obsTime}\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
 
     } catch (err) {
         metarDiv.textContent = "Error loading METAR";
