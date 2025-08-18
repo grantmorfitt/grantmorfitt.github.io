@@ -2,7 +2,7 @@
 layout: default
 title: Wiki
 ---
-
+![Blurred sectional background](assets/Washington.png)
 # Wiki
 This "wiki" is more of a collection of snippets and code blocks for people to use as reference. User beware. No guarantees, express or implied, regarding specific outcomes or results, can be expected by using anything you find here.
 

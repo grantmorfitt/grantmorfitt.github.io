@@ -5,6 +5,19 @@ title: Marshall Data Recorder Notes
 
 # Marshall Data Recorder and Data Formatting Notes **(IN PROGRESS)**
 
+<a href="example.txt" download="wiki/MarshallDataRecorderNotes.md" style="
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: sans-serif;
+">
+  ⬇ Download Text
+</a>
+
 ## MainOverview
 
 The Marshall data recorder can be largely grouped in to two sections: The DI-2008 DAQ, and the Advanced Navigation Spatial Fog Dual. Both pieces of equipment are controlled by a python script. This script initiates a GUI that enables the user to interface with both systems at once, simplifying collection and streamlining the process into one button press.
