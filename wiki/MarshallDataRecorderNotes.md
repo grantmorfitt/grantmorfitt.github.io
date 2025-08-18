@@ -3,10 +3,9 @@ layout: default
 title: Marshall Data Recorder Notes
 ---
 
-# Marshall Data Recorder and Data Formatting Notes **(IN PROGRESS)**
+# Marshall Data Recorder and Data Formatting Notes
 
-To download, right click -> save link as
-<a href="https://raw.githubusercontent.com/grantmorfitt/grantmorfitt.github.io/refs/heads/main/wiki/MarshallDataRecorderNotes.md" style="
+<a href="Marshall Data Recorder Notes.pdf" style="
   display: inline-block;
   padding: 0px 10px;
   background-color:#e3342f;
