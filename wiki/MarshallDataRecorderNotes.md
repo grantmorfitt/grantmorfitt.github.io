@@ -3,7 +3,7 @@ layout: default
 title: Marshall Data Recorder Notes
 ---
 
-# Marshall Data Recorder and Data Formatting Notes
+# Marshall Flight Data Recorder and Data Formatting Notes
 
 <a href="Marshall Data Recorder Notes.pdf" style="
   display: inline-block;
@@ -20,7 +20,7 @@ title: Marshall Data Recorder Notes
 
 ## MainOverview
 
-The Marshall data recorder can be largely grouped in to two sections: The DI-2008 DAQ, and the Advanced Navigation Spatial Fog Dual. Both pieces of equipment are controlled by a python script. This script initiates a GUI that enables the user to interface with both systems at once, simplifying collection and streamlining the process into one button press.
+The Marshall data recorder can be largely grouped in to two sections: The DI-2008 DAQ, and the Advanced Navigation Spatial FOG Dual. Both pieces of equipment are controlled by a python script. This script initiates a GUI that enables the user to interface with both systems at once, simplifying collection and streamlining the process into one button press.
 
 The DI-2008 is a Voltage Data Acquisition System that collects voltages from five string potentiometers. These potentiometers are connected to the cyclic (pitch and roll axis), collective, and the right pedal. The DAQ provides a 15 volt input across the wipers of the potentiometers and the change in resistance caused by the movement of the controls changes the subsequent voltage read by each channel of the DAQ.
 
@@ -72,7 +72,7 @@ To summarize:
 
 
 
-## Dual Spatial Fog Data
+## Spatial FOG Dual
 The Marshall Data recorder script I wrote directly takes the binary from the Spatial Fog device and saved it to a propriatary .anpp format. .anpp files must be converted by Spatial Fog Manager Log Converter to get GNSS/Sensor Logs from Advanced Navigation device
 [Spatial Fog Manager](https://www.advancednavigation.com/inertial-navigation-systems/fog-gnss-ins/spatial-fog-dual/#h-downloads)
 
