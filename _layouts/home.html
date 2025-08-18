@@ -252,7 +252,7 @@ async function fetchMetar() {
         const windSpeed = data.wind_speed?.value ?? "-";
         const windUnits = data.wind_speed?.units ?? "";
         const windSym = windArrow(data.wind_direction?.value);
-        const wind = `Wind: ${windDir}° ${windSym} at ${windSpeed} ${windUnits}`;
+        const wind = `Wind: ${windDir}°@${windSpeed} ${windUnits}`;
 
         const visibility = `Visibility: ${data.visibility?.value ?? '-'} ${data.visibility?.units ?? ''}`;
         const temp = `Temp: ${data.temperature?.value ?? '-'}°C`;
