@@ -7,10 +7,10 @@ title: Marshall Data Recorder Notes
 
 <a href="wiki/MarshallDataRecorderNotes.md" download="wiki/MarshallDataRecorderNotes.md" style="
   display: inline-block;
-  padding: 8px 10px;
-  background-color: ##e3342f;
+  padding: 0px 10px;
+  background-color:rgba(194, 44, 39, 0.72);
   color: white;
-  font-weight: bold;
+  font-weight: ;
   border-radius: 6px;
   text-decoration: none;
   font-family: sans-serif;
