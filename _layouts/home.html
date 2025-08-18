@@ -232,7 +232,7 @@ function windArrow(degrees) {
 function formatObservationTime(isoString) {
     if (!isoString) return "Observation Time: ---";
     const dt = new Date(isoString);
-    return `${dt.toUTCString()} zulu`;
+    return `${dt.toUTCString()}`;
 }
 
 async function fetchMetar() {
