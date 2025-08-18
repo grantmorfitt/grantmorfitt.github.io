@@ -245,6 +245,11 @@ function windArrow(degrees) {
         default: return "↑";
     }
 }
+function formatObservationTime(isoString) {
+    if (!isoString) return "Observation Time: ---";
+    const dt = new Date(isoString);
+    return `Observation Time: ${dt.toUTCString()}`;
+}
 
 async function fetchMetar() {
     try {
