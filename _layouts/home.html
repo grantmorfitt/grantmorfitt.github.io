@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ page.title | default: site.title }}</title>
+  <title>Grant Morfitt</title>
   <style>
     radar {
     position: fixed; 
@@ -74,17 +74,27 @@
     }
     .btn {
       display: inline-block;
-      background: linear-gradient(90deg, #06b6d4, #7c3aed);
+      background: linear-gradient(90deg, #e3342f, #000000);
       color: white;
-      padding: 14px 30px;
+      padding: 10px 24px;
       border-radius: 30px;
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1rem;
       text-decoration: none;
-      transition: background 0.3s ease;
+      box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin: 5px;
     }
     .btn:hover {
-      background: linear-gradient(90deg, #0ea5a4, #9d4edd);
+      background: linear-gradient(90deg, #cc1f1a, #111111);
+      box-shadow: 0 6px 12px rgba(204, 31, 26, 0.5);
+    }
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
     }
     footer {
       margin-top: 48px;
@@ -98,7 +108,7 @@
   <canvas id="radar"></canvas>
   <main>
     <img
-    src="{{ '/assets/avatar.png' | relative_url }}"
+    src="https://via.placeholder.com/150"
     alt="itsame"
     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
     />
@@ -122,82 +132,22 @@
     white-space: nowrap;
     text-align: right;
   ">
-    <span>Email: <a href="grant.e.morfitt@faa.gov" style="color:#e3342f; text-decoration:none;">grant.e.morfitt@faa.gov</a></span> &nbsp;|&nbsp;
+    <span>Email: <a href="mailto:grant.e.morfitt@faa.gov" style="color:#e3342f; text-decoration:none;">grant.e.morfitt@faa.gov</a></span> &nbsp;|&nbsp;
     <span>Phone: (609) 485-6509</span> &nbsp;|&nbsp;
     <span>William J Hughes Technical Center</span>
   </div>
 </div>
 
-  <a href="/wiki/" style="
-  background: linear-gradient(90deg, #e3342f, #000000);
-  color: white;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-" 
-  onmouseover="this.style.background='linear-gradient(90deg, #cc1f1a, #111111)'; this.style.boxShadow='0 6px 12px rgba(204, 31, 26, 0.5)';"
-  onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; this.style.boxShadow='0 4px 8px rgba(227, 52, 47, 0.4)';"
->
-  Wiki
-</a>
-  <a href="https://github.com/grantmorfitt" style="
-  background: linear-gradient(90deg, #e3342f, #000000);
-  color: white;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-" 
-onmouseover="this.style.background='linear-gradient(90deg, #cc1f1a, #111111)'; this.style.boxShadow='0 6px 12px rgba(204, 31, 26, 0.5)';"
-onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; this.style.boxShadow='0 4px 8px rgba(227, 52, 47, 0.4)';"
->
-  Github
-</a>
-</a>
-  <a href="https://www.linkedin.com/in/grant-morfitt/" style="
-  background: linear-gradient(90deg, #e3342f, #000000);
-  color: white;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-" 
-onmouseover="this.style.background='linear-gradient(90deg, #cc1f1a, #111111)'; this.style.boxShadow='0 6px 12px rgba(204, 31, 26, 0.5)';"
-onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; this.style.boxShadow='0 4px 8px rgba(227, 52, 47, 0.4)';"
->
-  LinkedIn
-</a>
-</a>
-  <a href="/publications/" style="
-  background: linear-gradient(90deg, #e3342f, #000000);
-  color: white;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-" 
-onmouseover="this.style.background='linear-gradient(90deg, #cc1f1a, #111111)'; this.style.boxShadow='0 6px 12px rgba(204, 31, 26, 0.5)';"
-onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; this.style.boxShadow='0 4px 8px rgba(227, 52, 47, 0.4)';"
->
-  Publications
-</a>
+  <div class="button-container">
+    <a href="/wiki/" class="btn">Wiki</a>
+    <a href="https://github.com/grantmorfitt" class="btn">Github</a>
+    <a href="https://www.linkedin.com/in/grant-morfitt/" class="btn">LinkedIn</a>
+    <a href="/publications/" class="btn">Publications</a>
+  </div>
   </main>
 
   <footer>
-    &copy; {{ "now" | date: "%Y" }} Grant Morfitt
+    &copy; 2026 Grant Morfitt
   </footer>
   
 
@@ -231,8 +181,6 @@ function padWindDirection(value) {
 
 function windArrow(degrees) {
     if (degrees === undefined || degrees === null) return "↑";
-    // Arrow rotation using Unicode compass arrows
-    // Simple approximation to 8 cardinal directions
     const dir = (Math.round(degrees / 45) * 45) % 360;
     switch (dir) {
         case 0: return "↑";
@@ -264,7 +212,6 @@ async function fetchMetar() {
 
         const raw = data.raw_text ?? "Raw METAR unavailable";
 
-        // Wind direction padded
         const windDir = padWindDirection(data.wind_direction?.value);
         const windSpeed = data.wind_speed?.value ?? "-";
         const windUnits = data.wind_speed?.units ?? "";
@@ -290,12 +237,10 @@ fetchMetar();
 setInterval(fetchMetar, 5 * 60 * 1000);
 </script>
 
-<canvas id="radar"></canvas>
 <script>
 const canvas = document.getElementById('radar');
 const ctx = canvas.getContext('2d');
 
-// Full-screen background
 canvas.style.position = 'fixed';
 canvas.style.top = '0';
 canvas.style.left = '0';
@@ -306,15 +251,13 @@ canvas.style.zIndex = '-1';
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Radar center offset to the right
-const radius = 350; // original larger size
-const radarOffsetX = canvas.width - radius - 50; // keep offset from right edge
+const radius = 350;
+const radarOffsetX = canvas.width - radius - 50;
 const radarOffsetY = canvas.height / 2;
 
 let sweepAngle = 0;
 const sweepSpeed = 0.01;
 
-// Aircraft setup
 let aircraft = [];
 for (let i = 0; i < 15; i++) {
     aircraft.push({
@@ -333,7 +276,6 @@ function randomCallsign() {
            Math.floor(Math.random()*9000 + 100);
 }
 
-// Draw radar background in white
 function drawRadarBackground() {
     ctx.strokeStyle = 'rgba(255,255,255,0.4)';
     ctx.lineWidth = 1.2;
@@ -355,7 +297,6 @@ function drawRadarBackground() {
     ctx.stroke();
 }
 
-// Draw sweep
 function drawSweep() {
     const grad = ctx.createRadialGradient(radarOffsetX, radarOffsetY, 0, radarOffsetX, radarOffsetY, radius);
     grad.addColorStop(0, 'rgba(255,255,255,0.2)');
@@ -368,7 +309,6 @@ function drawSweep() {
     ctx.fill();
 }
 
-// Draw aircraft as white squares
 function drawAircraft() {
     function normalizeAngle(a) {
         return (a + Math.PI*2) % (Math.PI*2);
@@ -385,13 +325,11 @@ function drawAircraft() {
             ac.y = -ac.y;
         }
 
-        // Compute angle to aircraft
         let angleToAc = Math.atan2(ac.y, ac.x);
         if (angleToAc < 0) angleToAc += Math.PI*2;
 
         const sweep = normalizeAngle(sweepAngle);
 
-        // Correct angular difference
         let diff = angleToAc - sweep;
         if (diff < -Math.PI) diff += Math.PI*2;
         if (diff > Math.PI) diff -= Math.PI*2;
@@ -426,7 +364,6 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Handle resize
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -434,40 +371,5 @@ window.addEventListener('resize', () => {
 
 animate();
 </script>
-
-
-
-
-  
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
