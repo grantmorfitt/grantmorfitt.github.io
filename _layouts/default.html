@@ -7,14 +7,14 @@
   <style>
     /* Your custom styles here — matching the clean centered look */
     pre code {
-    display: block;
-    padding: 12px;
-    background-color: #1e1e1e;
-    color: #f8f8f2;
-    border-radius: 6px;
-    overflow-x: auto;
-    font-family: Consolas, Monaco, 'Courier New', monospace;
-  }
+      display: block;
+      padding: 12px;
+      background-color: #1e1e1e;
+      color: #f8f8f2;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, 'Courier New', monospace;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -67,53 +67,55 @@
       padding: 8px 0;
       border-bottom: 1px solid #eee;
     }
+    
+    /* Navigation styles */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 0;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      z-index: 1000;
+    }
+    
+    .nav-btn {
+      background: linear-gradient(90deg, #e3342f, #000000);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+      background: linear-gradient(90deg, #cc1f1a, #111111);
+      box-shadow: 0 6px 12px rgba(204, 31, 26, 0.5);
+    }
+    
+    /* Add padding to body to account for fixed nav */
+    body {
+      padding-top: 80px;
+    }
   </style>
 </head>
 <body>
-<nav style="
-  padding: 12px 0;
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  font-family: Arial, sans-serif;
-">
-  <a href="{{ '/' | relative_url }}" style="
-    background: linear-gradient(90deg, #e3342f, #000000);
-    color: white;
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  "
-  onmouseover="this.style.background='linear-gradient(90deg, #cc1f1a, #111111)'; this.style.boxShadow='0 6px 12px rgba(204, 31, 26, 0.5)';"
-  onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; this.style.boxShadow='0 4px 8px rgba(227, 52, 47, 0.4)';"
-  >
-    Home
-  </a>
-
-  <a href="{{ '/wiki/' | relative_url }}" style="
-    background: linear-gradient(90deg, #e3342f, #000000);
-    color: white;
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  "
-  onmouseover="this.style.background='linear-gradient(90deg, #cc1f1a, #111111)'; this.style.boxShadow='0 6px 12px rgba(204, 31, 26, 0.5)';"
-  onmouseout="this.style.background='linear-gradient(90deg, #e3342f, #000000)'; this.style.boxShadow='0 4px 8px rgba(227, 52, 47, 0.4)';"
-  >
-    Wiki
-  </a>
+<nav>
+  <a href="{{ '/' | relative_url }}" class="nav-btn">Home</a>
+  <a href="{{ '/wiki/' | relative_url }}" class="nav-btn">Wiki</a>
+  <a href="https://github.com/grantmorfitt" class="nav-btn">Github</a>
+  <a href="https://www.linkedin.com/in/grant-morfitt/" class="nav-btn">LinkedIn</a>
+  <a href="{{ '/publications/' | relative_url }}" class="nav-btn">Publications</a>
 </nav>
 
-
-  
   <main>
     {{ content }}
   </main>
@@ -122,11 +124,3 @@
   </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
