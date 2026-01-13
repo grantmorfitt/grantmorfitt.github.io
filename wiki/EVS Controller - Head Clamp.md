@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Unity EVS Stream + FOV Clmp
+title: Unity EVS Stream FOV Clmp
 ---
 # Script for sending HMD user head rotation via MQTT to companion application
 
