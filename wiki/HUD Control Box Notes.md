@@ -11,6 +11,8 @@ title: HUD Wireless Control Box
 
 The HUD Wireless Control Box was built as a way to wirelessly send keystrokes to a computer on the network to control a VR HUD running on a desktop PC. The problem was that the user wearing the head mounted device is sitting in the cockpit of the aircraft simulator and had no straightforward way to control the keyboard at the IOS station. To remedy this, the control box was born. The device is controlled via a raspberry pi zero W, which automatically boots and runs the script snippet below. A companion program runs on the desktop side which grabs the instance of the HUD program and simulates keystrokes through low level Windows APIs.
 
+<img src="../assets/HUD_2 App Mode Active.png" alt="HUD Pilot Visualization" width="40%" height="50%">
+<img src="../assets/HUD_1_App Mode Active.png" alt="HUD Pilot Color Change Mode" width="40%" height="50%">
 ## Wireless Control Box
 
 <img src="../assets/Control Box1.jpg" alt="Control Box Front" width="40%" height="50%">
