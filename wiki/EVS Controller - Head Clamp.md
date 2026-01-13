@@ -2,8 +2,8 @@
 layout: default
 title: Unity EVS Stream + FOV Clmp
 ---
-# Script for parsing multiple simulator data files in a folder
-The script parses these files into one large dataframe and correlates it to scenarios that were run during the experiment.
+# Script for sending HMD user head rotation via MQTT to companion application
+
 
 ```C#
 using System;
