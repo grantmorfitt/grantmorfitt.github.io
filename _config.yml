@@ -1,5 +1,7 @@
 title: "Grant Morfitt Wiki"
-theme: minima
+remote_theme: pages-themes/minimal@latest
+plugins:
+  - jekyll-remote-theme
 markdown: kramdown
 highlighter: rouge
 include:
