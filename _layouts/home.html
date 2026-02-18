@@ -16,10 +16,12 @@
     }
     #cursor-gif {
     position: fixed;
-    width: 80px;              /* adjust size */
+    width: 200px;              /* adjust size */
     height: auto;
     pointer-events: none;     /* allows clicking through it */
-    z-index: 9999;
+    border: 3px solid red;
+    background: yellow;
+    z-index: 2147483647;
     transform: translate(-50%, -50%);
     transition: transform 0.05s linear;
     }
