@@ -14,6 +14,15 @@
     background: black;
     z-index: -1;     
     }
+    #cursor-gif {
+    position: fixed;
+    width: 80px;              /* adjust size */
+    height: auto;
+    pointer-events: none;     /* allows clicking through it */
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s linear;
+    }
     body {
       margin: 0; 
       font-family: Arial, sans-serif; 
@@ -106,6 +115,7 @@
 </head>
 <body>
   <canvas id="radar"></canvas>
+  <img id="cursor-gif" src="assets/DOGGYDOG.gif" alt="cursor follower" />
   <main>
     <img
     src="assets/avatar.png"
@@ -371,5 +381,31 @@ window.addEventListener('resize', () => {
 
 animate();
 </script>
+<script>
+  const cursorGif = document.getElementById("cursor-gif");
+
+  let mouseX = 0, mouseY = 0;
+  let posX = 0, posY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateFollower() {
+    posX += (mouseX - posX) * 0.15;
+    posY += (mouseY - posY) * 0.15;
+
+    cursorGif.style.left = posX + "px";
+    cursorGif.style.top = posY + "px";
+
+    requestAnimationFrame(animateFollower);
+  }
+
+  animateFollower();
+</script>
+
+
 </body>
+
 </html>
