@@ -6,101 +6,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Grant Morfitt</title>
   <style>
-    radar {
-    position: fixed; 
-    right: 0;           
-    top: 0;
-    width: 100vw;      
-    height: 100vh;       
-    background: black;
-    z-index: -1;     
-    }
-    #cursor-gif {
-    position: fixed;
-    width: 200px;              /* adjust size */
-    height: auto;
-    pointer-events: none;     /* allows clicking through it */
-    border: 3px solid red;
-    background: yellow;
-    z-index: 2147483647;
-    transform: translate(-50%, -50%);
-    transition: transform 0.05s linear;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0; 
-      font-family: Arial, sans-serif; 
-      background-color: #f4f4f9; 
-      color: #333; 
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh; 
-      justify-content: center; 
-      align-items: center; 
+      font-family: Arial, sans-serif;
+      background-color: #0a0000;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
+      overflow-x: hidden;
     }
+
+    /* === DOOM FLAME CANVAS === */
+    #flame-canvas {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    /* Dark gradient overlay so content stays readable */
+    #flame-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 0, 0, 0.80) 0%,
+        rgba(5, 0, 0, 0.50) 55%,
+        rgba(5, 0, 0, 0.08) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* === MAIN CARD === */
     main {
-      max-width: 700px; 
-      width: 100%; 
-      background: white; 
-      padding: 40px 30px; 
-      border-radius: 14px; 
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      width: 100%;
+      background: rgba(10, 2, 0, 0.82);
+      padding: 40px 30px;
+      border-radius: 14px;
+      border: 1px solid #441100;
+      box-shadow: 0 0 40px rgba(255, 60, 0, 0.15), 0 6px 16px rgba(0,0,0,0.6);
       text-align: center;
     }
-    .avatar {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #06b6d4, #7c3aed);
-      color: white;
-      font-weight: 700;
-      font-size: 48px;
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: 2.8rem;
+      color: #ff6600;
+      text-shadow: 0 0 10px #ff2200, 0 0 2px #ffaa00;
+    }
+
+    p.lead {
+      margin: 0 0 20px;
+      font-size: 1.15rem;
+      color: #cc7744;
+    }
+
+    /* === CONTACT BAR === */
+    .contact-bar {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px;
-      user-select: none;
+      margin: 12px auto 28px;
+      padding: 0 10px;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #bb8866;
     }
-    h1 {
-      margin: 0 0 8px 0;
-      font-size: 2.8rem;
-    }
-    p.lead {
-      margin: 0 0 20px 0;
-      font-size: 1.15rem;
-      color: #555;
-    }
-    .socials {
-      margin-bottom: 28px;
-    }
-    .socials a {
-      display: inline-block;
-      margin: 0 12px;
-      font-size: 28px;
+
+    .contact-bar a {
+      color: #ff8833;
       text-decoration: none;
-      color: #333;
-      transition: color 0.2s;
     }
-    .socials a:hover {
-      color: #06b6d4;
+
+    .contact-bar a:hover {
+      color: #ffcc66;
     }
+
+    .contact-bar .sep {
+      color: #441100;
+      padding: 0 4px;
+    }
+
+    /* === BUTTONS === */
     .btn {
       display: inline-block;
-      background: linear-gradient(90deg, #e3342f, #000000);
-      color: white;
+      background: linear-gradient(90deg, #cc2200, #330000);
+      color: #ffe0b0;
       padding: 10px 24px;
       border-radius: 30px;
       font-weight: 700;
       font-size: 1rem;
       text-decoration: none;
-      box-shadow: 0 4px 8px rgba(227, 52, 47, 0.4);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 12px rgba(200, 40, 0, 0.4);
+      border: 1px solid #661100;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
       margin: 5px;
     }
+
     .btn:hover {
-      background: linear-gradient(90deg, #cc1f1a, #111111);
-      box-shadow: 0 6px 12px rgba(204, 31, 26, 0.5);
+      background: linear-gradient(90deg, #ff3300, #550000);
+      box-shadow: 0 6px 18px rgba(255, 60, 0, 0.55);
+      color: #fff8e0;
     }
+
     .button-container {
       display: flex;
       flex-wrap: wrap;
@@ -108,172 +130,131 @@
       gap: 10px;
       margin-top: 20px;
     }
+
+    /* === FOOTER === */
     footer {
-      margin-top: 48px;
+      position: relative;
+      z-index: 2;
+      margin-top: 32px;
       font-size: 0.9rem;
-      color: #888;
+      color: #553322;
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <img id="cursor-gif" src="assets/DOGGYDOG.gif" alt="cursor follower" />
+
+  <canvas id="flame-canvas"></canvas>
+  <div id="flame-overlay"></div>
+
   <main>
     <img
-    src="assets/avatar.png"
-    alt="itsame"
-    style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+      src="assets/avatar.png"
+      alt="Grant Morfitt"
+      style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 20px rgba(255,80,0,0.4), 0 4px 12px rgba(0,0,0,0.5);"
     />
     <h1>Grant Morfitt</h1>
-    <p class="lead">Research Engineer | Federal Aviation Administration</p>
-    <div style="
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 800px;
-  margin: 20px auto 40px;
-  padding: 0 20px;
-  gap: 10px;
-">
-  <div style="
-    flex: 1 1 auto;
-    min-width: 250px;
-    font-size: 1rem;
-    color: #333;
-    white-space: nowrap;
-    text-align: right;
-  ">
-    <span>Email: <a href="mailto:grant.e.morfitt@faa.gov" style="color:#e3342f; text-decoration:none;">grant.e.morfitt@faa.gov</a></span> &nbsp;|&nbsp;
-    <span>Phone: (609) 485-6509</span> &nbsp;|&nbsp;
-    <span>William J Hughes Technical Center</span>
-  </div>
-</div>
+    <p class="lead">Fire Safety Research Engineer</p>
 
-  <div class="button-container">
-    <a href="/wiki/" class="btn">Wiki</a>
-    <a href="https://github.com/grantmorfitt" class="btn">Github</a>
-    <a href="https://www.linkedin.com/in/grant-morfitt/" class="btn">LinkedIn</a>
-    <a href="/publications/" class="btn">Publications</a>
-  </div>
+    <div class="contact-bar">
+      <span>Email: <a href="mailto:grant.e.morfitt@faa.gov">grant.e.morfitt@faa.gov</a></span>
+      <span class="sep">|</span>
+      <span>Phone: (609) 485-6509</span>
+      <span class="sep">|</span>
+      <span>William J. Hughes Technical Center</span>
+    </div>
+
+    <div class="button-container">
+      <a href="/wiki/" class="btn">Wiki</a>
+      <a href="https://github.com/grantmorfitt" class="btn">GitHub</a>
+      <a href="https://www.linkedin.com/in/grant-morfitt/" class="btn">LinkedIn</a>
+      <a href="/publications/" class="btn">Publications</a>
+    </div>
   </main>
 
   <footer>
     &copy; 2026 Grant Morfitt
   </footer>
-  
 
-<!-- METAR overlay div -->
-<div id="metar-overlay" style="
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-family: monospace;
-    color: lime;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 10px 14px;
-    border-radius: 6px;
-    z-index: 10;
-    white-space: pre;
-    line-height: 1.4em;
-">
-    Loading KACY METAR...
-</div>
+  <script>
+    // === DOOM-STYLE 8-BIT FLAME ALGORITHM ===
+    const canvas = document.getElementById('flame-canvas');
+    const ctx = canvas.getContext('2d');
 
+    const palette = [
+      [0,0,0],[7,0,0],[15,0,0],[23,0,0],[31,0,0],[39,0,0],[47,0,0],
+      [55,0,0],[63,0,0],[71,0,0],[79,0,0],[87,0,0],[95,0,0],[103,0,0],
+      [111,0,0],[119,0,0],[127,0,0],[135,7,0],[143,15,0],[151,23,0],
+      [159,31,0],[167,39,0],[175,47,0],[183,55,0],[191,63,0],[199,71,0],
+      [207,79,0],[215,87,0],[223,95,0],[231,103,0],[239,111,0],[247,119,0],
+      [255,127,0],[255,135,7],[255,143,15],[255,151,23],[255,159,31],
+      [255,167,39],[255,175,47],[255,183,55],[255,191,63],[255,199,71],
+      [255,207,79],[255,215,87],[255,223,95],[255,231,103],[255,239,111],
+      [255,247,119],[255,255,127],[255,255,143],[255,255,159],[255,255,175],
+      [255,255,191],[255,255,207],[255,255,223],[255,255,239],[255,255,255]
+    ];
 
-<script>
-const metarDiv = document.getElementById('metar-overlay');
-const apiKey = "lupgSAUhyDVXzw74iRWmARC7S6qX0lp_uAju-OeDhOg";
-const station = "KACY";
+    const PIXEL = 8;
+    let cols, rows, fire;
 
-function padWindDirection(value) {
-    if (value === undefined || value === null) return "---";
-    return String(value).padStart(3, "0");
-}
-
-function windArrow(degrees) {
-    if (degrees === undefined || degrees === null) return "↑";
-    const dir = (Math.round(degrees / 45) * 45) % 360;
-    switch (dir) {
-        case 0: return "↑";
-        case 45: return "↗";
-        case 90: return "→";
-        case 135: return "↘";
-        case 180: return "↓";
-        case 225: return "↙";
-        case 270: return "←";
-        case 315: return "↖";
-        default: return "↑";
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+      cols = Math.ceil(canvas.width  / PIXEL);
+      rows = Math.ceil(canvas.height / PIXEL);
+      fire = new Uint8Array(cols * rows);
+      for (let x = 0; x < cols; x++) {
+        fire[(rows - 1) * cols + x] = palette.length - 1;
+      }
     }
-}
-function formatObservationTime(isoString) {
-    if (!isoString) return "Observation Time: ---";
-    const dt = new Date(isoString);
-    return `${dt.toUTCString()}`;
-}
 
-async function fetchMetar() {
-    try {
-        const response = await fetch(`https://avwx.rest/api/metar/${station}?format=json&onfail=cache`, {
-            headers: { "Authorization": apiKey }
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch METAR");
-
-        const data = await response.json();
-
-        const raw = data.raw_text ?? "Raw METAR unavailable";
-
-        const windDir = padWindDirection(data.wind_direction?.value);
-        const windSpeed = data.wind_speed?.value ?? "-";
-        const windUnits = data.wind_speed?.units ?? "";
-        const windSym = windArrow(data.wind_direction?.value);
-        const wind = `Wind: ${windDir}°@${windSpeed} ${windUnits}`;
-
-        const visibility = `Visibility: ${data.visibility?.value ?? '-'} ${data.visibility?.units ?? ''}`;
-        const temp = `Temp: ${data.temperature?.value ?? '-'}°C`;
-        const dew = `Dew Pt: ${data.dewpoint?.value ?? '-'}°C`;
-        const altimeter = `Altimeter: ${data.altimeter?.value ?? '-'} ${data.altimeter?.units ?? ''}`;
-        const flight_rules = `Flight Rules: ${data.flight_rules ?? '-'}`;
-        const obsTime = formatObservationTime(data.time?.dt);
-
-        metarDiv.textContent = `KACY METAR\n${obsTime}\n${wind}\n${visibility}\n${temp}\n${dew}\n${altimeter}\n${flight_rules}`;
-
-    } catch (err) {
-        metarDiv.textContent = "Error loading METAR";
-        console.error(err);
+    function spread() {
+      for (let y = 0; y < rows - 1; y++) {
+        for (let x = 0; x < cols; x++) {
+          const below = fire[(y + 1) * cols + x];
+          if (below === 0) {
+            fire[y * cols + x] = 0;
+          } else {
+            const decay = Math.floor(Math.random() * 3);
+            const drift = Math.floor(Math.random() * 3) - 1;
+            const nx    = Math.max(0, Math.min(cols - 1, x - drift));
+            fire[y * cols + nx] = Math.max(0, below - decay);
+          }
+        }
+      }
     }
-}
 
-fetchMetar();
-setInterval(fetchMetar, 5 * 60 * 1000);
-</script>
+    function draw() {
+      const imgData = ctx.createImageData(canvas.width, canvas.height);
+      const d = imgData.data;
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const val = fire[y * cols + x];
+          const [r, g, b] = palette[Math.min(val, palette.length - 1)];
+          for (let py = 0; py < PIXEL; py++) {
+            const ry = y * PIXEL + py;
+            if (ry >= canvas.height) continue;
+            for (let px = 0; px < PIXEL; px++) {
+              const rx = x * PIXEL + px;
+              if (rx >= canvas.width) continue;
+              const i = (ry * canvas.width + rx) * 4;
+              d[i] = r; d[i+1] = g; d[i+2] = b; d[i+3] = 255;
+            }
+          }
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
 
-<script>
-  const cursorGif = document.getElementById("cursor-gif");
+    window.addEventListener('resize', resize);
+    resize();
 
-  let mouseX = 0, mouseY = 0;
-  let posX = 0, posY = 0;
-
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function animateFollower() {
-    posX += (mouseX - posX) * 0.15;
-    posY += (mouseY - posY) * 0.15;
-
-    cursorGif.style.left = posX + "px";
-    cursorGif.style.top = posY + "px";
-
-    requestAnimationFrame(animateFollower);
-  }
-
-  animateFollower();
-</script>
-
+    (function loop() {
+      spread();
+      draw();
+      setTimeout(() => requestAnimationFrame(loop), 80);
+    })();
+  </script>
 
 </body>
-
 </html>
