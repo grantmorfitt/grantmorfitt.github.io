@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="/assets/style.css">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -116,7 +117,6 @@
   </style>
 </head>
 <body>
-  <canvas id="radar"></canvas>
   <img id="cursor-gif" src="assets/DOGGYDOG.gif" alt="cursor follower" />
   <main>
     <img
@@ -249,140 +249,6 @@ fetchMetar();
 setInterval(fetchMetar, 5 * 60 * 1000);
 </script>
 
-<script>
-const canvas = document.getElementById('radar');
-const ctx = canvas.getContext('2d');
-
-canvas.style.position = 'fixed';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.width = '100vw';
-canvas.style.height = '100vh';
-canvas.style.zIndex = '-1';
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const radius = 350;
-const radarOffsetX = canvas.width - radius - 50;
-const radarOffsetY = canvas.height / 2;
-
-let sweepAngle = 0;
-const sweepSpeed = 0.01;
-
-let aircraft = [];
-for (let i = 0; i < 15; i++) {
-    aircraft.push({
-        x: (Math.random() - 0.5) * radius * 1.8,
-        y: (Math.random() - 0.5) * radius * 1.8,
-        heading: Math.random() * 360,
-        callsign: randomCallsign(),
-        altitude: Math.floor(Math.random() * 300) * 100 + 1000,
-        lastSeen: 0
-    });
-}
-
-function randomCallsign() {
-    const airlines = ["DAL","AAL","UAL","SWA","JBU","ASA"];
-    return airlines[Math.floor(Math.random()*airlines.length)] + 
-           Math.floor(Math.random()*9000 + 100);
-}
-
-function drawRadarBackground() {
-    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ctx.arc(radarOffsetX, radarOffsetY, radius, 0, Math.PI*2);
-    ctx.stroke();
-
-    for (let i=1; i<=4; i++) {
-        ctx.beginPath();
-        ctx.arc(radarOffsetX, radarOffsetY, (radius/4)*i, 0, Math.PI*2);
-        ctx.stroke();
-    }
-
-    ctx.beginPath();
-    ctx.moveTo(radarOffsetX - radius, radarOffsetY);
-    ctx.lineTo(radarOffsetX + radius, radarOffsetY);
-    ctx.moveTo(radarOffsetX, radarOffsetY - radius);
-    ctx.lineTo(radarOffsetX, radarOffsetY + radius);
-    ctx.stroke();
-}
-
-function drawSweep() {
-    const grad = ctx.createRadialGradient(radarOffsetX, radarOffsetY, 0, radarOffsetX, radarOffsetY, radius);
-    grad.addColorStop(0, 'rgba(255,255,255,0.2)');
-    grad.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.moveTo(radarOffsetX, radarOffsetY);
-    ctx.arc(radarOffsetX, radarOffsetY, radius, sweepAngle, sweepAngle + 0.12);
-    ctx.closePath();
-    ctx.fill();
-}
-
-function drawAircraft() {
-    function normalizeAngle(a) {
-        return (a + Math.PI*2) % (Math.PI*2);
-    }
-
-    for (let ac of aircraft) {
-        const speed = 0.2;
-        ac.x += Math.cos(ac.heading * Math.PI/180) * speed;
-        ac.y += Math.sin(ac.heading * Math.PI/180) * speed;
-
-        const dist = Math.sqrt(ac.x**2 + ac.y**2);
-        if (dist > radius) {
-            ac.x = -ac.x;
-            ac.y = -ac.y;
-        }
-
-        let angleToAc = Math.atan2(ac.y, ac.x);
-        if (angleToAc < 0) angleToAc += Math.PI*2;
-
-        const sweep = normalizeAngle(sweepAngle);
-
-        let diff = angleToAc - sweep;
-        if (diff < -Math.PI) diff += Math.PI*2;
-        if (diff > Math.PI) diff -= Math.PI*2;
-        diff = Math.abs(diff);
-
-        if (diff < 0.12) ac.lastSeen = Date.now();
-
-        const age = Date.now() - ac.lastSeen;
-        if (age < 1500) {
-            const alpha = 1 - age / 1500;
-
-            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            ctx.fillRect(radarOffsetX + ac.x - 4, radarOffsetY + ac.y - 4, 8, 8);
-
-            ctx.font = '12px monospace';
-            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-            ctx.fillText(`${ac.callsign}`, radarOffsetX + ac.x + 10, radarOffsetY + ac.y - 10);
-        }
-    }
-}
-function animate() {
-    ctx.fillStyle = 'rgba(0,0,0,0.2)';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    drawRadarBackground();
-    drawSweep();
-    drawAircraft();
-
-    sweepAngle += sweepSpeed;
-    if (sweepAngle > Math.PI*2) sweepAngle -= Math.PI*2;
-
-    requestAnimationFrame(animate);
-}
-
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
-
-animate();
-</script>
 <script>
   const cursorGif = document.getElementById("cursor-gif");
 
