@@ -87,7 +87,7 @@ function spread() {
       if (below === 0) {
         fire[y * cols + x] = 0;
       } else {
-        const decay = Math.floor(Math.random() * 3);
+        const decay = Math.floor(Math.random() * 5) + 1;
         const drift = Math.floor(Math.random() * 3) - 1;
         const nx = Math.max(0, Math.min(cols - 1, x - drift));
         fire[y * cols + nx] = Math.max(0, below - decay);
@@ -132,6 +132,6 @@ resize();
 (function loop() {
   spread();
   draw();
-  setTimeout(() => requestAnimationFrame(loop), 80);
+  setTimeout(() => requestAnimationFrame(loop));
 })();
 </script>
