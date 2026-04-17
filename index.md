@@ -1,23 +1,27 @@
 ---
-layout: default
-title: Fire Safety Research
+layout: home
+title: Home
 ---
 
-<div class="container">
-  <h1>Fire Safety Research</h1>
+<img id="cursor-gif" src="assets/DOGGYDOG.gif" alt="cursor follower" />
 
-  <p>
-    Research focused on firefighter performance, cognitive workload,
-    and simulation-based training systems.
-  </p>
+<script>
+  const cursorGif = document.getElementById("cursor-gif");
+  let mouseX = window.innerWidth/2, mouseY = window.innerHeight/2;
+  let posX = mouseX, posY = mouseY;
 
-  <div class="buttons">
-    <a href="/wiki/">Wiki</a>
-    <a href="/publications/">Publications</a>
-    <a href="https://www.linkedin.com/in/grant-morfitt/" target="_blank">LinkedIn</a>
-  </div>
-</div>
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-<canvas id="fire"></canvas>
+  function animateFollower() {
+    posX += (mouseX - posX) * 0.15;
+    posY += (mouseY - posY) * 0.15;
+    cursorGif.style.left = posX + "px";
+    cursorGif.style.top = posY + "px";
+    requestAnimationFrame(animateFollower);
+  }
 
-<script src="/assets/fire.js"></script>
+  animateFollower();
+</script>
