@@ -8,37 +8,36 @@ body {
   .rotating-border {
     position: relative;
     border-radius: 14px;
-    overflow: hidden;        /* 👈 CRITICAL: clips the spinning layer */
   }
   
-  /* spinning gradient */
   .rotating-border::before {
     content: "";
     position: absolute;
-    inset: 0;                /* 👈 no negative inset */
+    inset: 0;
     border-radius: inherit;
   
     background: conic-gradient(
       from 0deg,
-      transparent 20%,
+      transparent 30%,
       #ff3300,
       #ffaa33,
       #ff3300,
-      transparent 80%
+      transparent 70%
     );
   
     animation: spin 5s linear infinite;
+  
+
+    -webkit-mask: 
+      linear-gradient(#000 0 0) content-box, 
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  
+    padding: 3px; 
   }
   
-  /* inner content mask */
-  .rotating-border::after {
-    content: "";
-    position: absolute;
-    inset: 3px; 
-    background: rgba(10, 2, 0, 0.9);
-    border-radius: inherit;
-  }
-  
+ 
   .rotating-border > * {
     position: relative;
     z-index: 1;
