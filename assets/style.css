@@ -5,6 +5,47 @@ body {
     background: black;
   }
   
+  .rotating-border {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  
+  .rotating-border::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from 0deg,
+      transparent,
+      #ff3300,
+      #ffaa33,
+      #ff3300,
+      transparent
+    );
+    animation: spin 4s linear infinite;
+    z-index: 0;
+  }
+  
+  .rotating-border::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: rgba(10, 2, 0, 0.9);
+    border-radius: inherit;
+    z-index: 1;
+  }
+  
+  .rotating-border > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
   .container {
     position: relative;
     z-index: 2;
