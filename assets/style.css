@@ -8,7 +8,7 @@ body {
   .rotating-border {
     position: relative;
     border-radius: 14px;
-    overflow: hidden;
+    z-index: 0;
   }
   
   .rotating-border::before {
@@ -16,36 +16,41 @@ body {
     position: absolute;
     inset: -3px;
     border-radius: inherit;
+  
     background: conic-gradient(
       from 0deg,
-      transparent,
+      transparent 20%,
       #ff3300,
       #ffaa33,
       #ff3300,
-      transparent
+      transparent 80%
     );
+  
     animation: spin 4s linear infinite;
-    z-index: 0;
+  
+    z-index: -1;
   }
   
   .rotating-border::after {
     content: "";
     position: absolute;
-    inset: 3px;
+    inset: 2px;
     background: rgba(10, 2, 0, 0.9);
     border-radius: inherit;
-    z-index: 1;
+    z-index: -1;
   }
   
   .rotating-border > * {
     position: relative;
-    z-index: 2;
+    z-index: 1;
   }
   
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  
+
   .container {
     position: relative;
     z-index: 2;
