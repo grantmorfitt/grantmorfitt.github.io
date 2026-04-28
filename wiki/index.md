@@ -3,7 +3,7 @@ layout: default
 title: Wiki
 ---
 
-<!-- 🔥 Flame Canvas -->
+<!-- Flame Canvas -->
 <canvas id="flame-canvas"></canvas>
 <div id="flame-overlay"></div>
 
